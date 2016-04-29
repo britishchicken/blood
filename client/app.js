@@ -14,7 +14,7 @@ let app = angular.module('blood', ['ngRoute'])
       controllerAs: 'ProfileCtrl'
   })
   .when('/landing', {
-    templateURL: 'landing/landing.html',
+    templateUrl: 'landing/landing.html',
     controller: 'LandingController',
     controllerAs: 'LandingCtrl'
 
