@@ -12,12 +12,12 @@
           return `${self.firstName} ${self.lastName}`;
         };
 
-        $scope.songs = [
+        self.songs = [
         'Here Comes The Sun'
         ];
 
-        $scope.addSong = (song) => {
-          $scope.songs.push(song);
+        self.addSong = (song) => {
+          self.songs.push(song);
         };
 
         return self;
