@@ -31,9 +31,9 @@ describe('MyController', function(){
       $scope: scope
     });
 
-    scope.addSong('While My Guitar Gently Weeps');
+    myController.addSong('While My Guitar Gently Weeps');
 
-    scope.songs.should.contain('While My Guitar Gently Weeps');
+    myController.songs.should.contain('While My Guitar Gently Weeps');
   }));
 });
 
