@@ -1,0 +1,57 @@
+.bg-primary {
+  background-color: #700000;
+}
+
+.header-content {
+  text-align: center;
+  position: relative;
+  margin-left: 18%;
+  margin-right: 18%;
+  padding-top: 90px;
+}
+
+
+.header-content-inner h1{
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 200px;
+}
+
+.header-content-inner p {
+  font-weight: 300;
+  color: fade(white, 70%);
+  font-size: 1.5em;
+  margin-bottom: 50px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+header {
+  position: relative;
+  /*background-size: cover;*/
+  background-position: center;
+  background: url('assests/donor.png') no-repeat;
+   -webkit-background-size: 100% auto;
+   -moz-background-size: 100% auto;
+   -o-background-size: 100% auto;
+    background-size: 100% auto;
+    height: 600px;
+  text-align: center;
+  color: white;
+text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
+
+}
+
+#about {
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+#services {
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
