@@ -19,6 +19,7 @@ module.exports = function(config) {
       'client/lib/angular-mocks/angular-mocks.js',
       'client/example/example_controller.js',
       //Add tests below this line
+
       //above this line. Don't forget commas at the end!
       'client/*/*.tests.js'
     ],
