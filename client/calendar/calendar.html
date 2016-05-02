@@ -1,11 +1,30 @@
-<div id="calendar">
+<div id="calendar-container">
   <h3>Calendar</h3>
-  <div id="authorize-div">
-    <button ng-click="CalendarCtrl.handleAuthClick()">
-      Show My Calendar
-    </button>
+  <div id="calendar-summary">
+    <p>Account: <b>{{CalendarCtrl.events.summary}}</b></p>
+    <p>Updated: <b>{{CalendarCtrl.events.updated}}</b></p>
   </div>
-  <pre id="output">
 
-  </pre>
+  <div id="calendar-form-wrapper">
+    <h3>Schedule an Event</h3>
+    <form>
+
+    </form>
+  </div>
+
+  <div id="calendar-events-wrapper">
+    <h3>Upcoming Events</h3>
+    <div ng-repeat="item in CalendarCtrl.events.items" style="border: double">
+      <p><b>status:</b> {{item.status}}</p>
+      <p><b>htmlLink:</b> {{item.htmlLink}}</p>
+      <p><b>created:</b> {{item.created}}</p>
+      <p><b>updated:</b> {{item.updated}}</p>
+      <p><b>summary:</b> {{item.summary}}</p>
+      <p><b>location:</b> {{item.location}}</p>
+      <p><b>creator:</b> {{item.creator.displayName}} <{{item.creator.email}}></p>
+      <p><b>organizer:</b> {{item.organizer.displayName}} <{{item.organizer.email}}</p>
+      <p><b>start:</b> {{item.start.dateTime}}</p>
+      <p><b>end:</b> {{item.end.dateTime}}</p>
+    </div>
+  </div>
 </div>
