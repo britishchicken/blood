@@ -21,6 +21,7 @@ let Hospital = controllers.Hospital;
 /* Routes */
 let profileRouter = require('./routes/profile.js');
 let hospitalRouter = require('./routes/hospital.js');
+let calendarRouter = require('./routes/calendar.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -54,7 +55,7 @@ function(accessToken, refreshToken, profile, done) {
   process.nextTick(() => {
       //Check whether the User exists or not using profile.id
       //Further DB code.
-      Donor.findOrCreate({where: {fbid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile._json.picture.data.url}})
+      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile._json.picture.data.url}})
       .spread(function(user, created) {
         done(null, user);
       });
@@ -62,7 +63,7 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
-passport.use('hospital-signup', new LocalStrategy(function(username, password, done) {
+passport.use('local-signup', new LocalStrategy(function(username, password, done) {
   process.nextTick(function() {
 
     Hospital.findOne({where: {username: username}})
@@ -81,7 +82,7 @@ passport.use('hospital-signup', new LocalStrategy(function(username, password, d
   });
 }));
 
-passport.use('hospital-login', new LocalStrategy(function(username, password, done) {
+passport.use('local-login', new LocalStrategy(function(username, password, done) {
   Hospital.findOne({where: {username: username}})
   .then(function(hospital) {
     if (!hospital) {
@@ -138,12 +139,12 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.post('/auth/hospital/login', passport.authenticate('hospital-login'),
+app.post('/auth/hospital/login', passport.authenticate('local-login'),
   (req, res) => {
     res.send(req.user);
   });
 
-app.post('/auth/hospital/signup', passport.authenticate('hospital-signup'),
+app.post('/auth/hospital/signup', passport.authenticate('local-signup'),
   (req, res) => {
     res.send(req.user);
   });
@@ -160,6 +161,7 @@ app.post('/auth/donor/signup', passport.authenticate('donor-signup'),
 
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
+app.use('/api/calendar', calendarRouter);
 
 app.listen(8080, () => {
   console.log('Blood app listening on port 8080!');
