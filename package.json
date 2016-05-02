@@ -27,6 +27,8 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "geolib": "^2.0.20",
+    "google-auth-library": "^0.9.7",
+    "googleapis": "^5.2.1",
     "karma": "^0.13.22",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-chai": "^0.1.0",
