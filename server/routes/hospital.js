@@ -1,9 +1,10 @@
 'use strict'
-let hosptialRouter = require('express').Router();
+let hospitalRouter = require('express').Router();
 let controllers = require('../controllers/controller.js');
 let Hospital = controllers.Hospital;
+let url = require('url');
 
-hosptialRouter.route('/profile')
+hospitalRouter.route('/profile')
 .get((req, res) => {
   res.send(req.user);
 })
@@ -15,7 +16,7 @@ hosptialRouter.route('/profile')
   });
 });
 
-hosptialRouter.route('/profile/:id')
+hospitalRouter.route('/profile/:id')
 .get((req, res) => {
   Hospital.findOne({where: {id: req.params.id}})
   .then(hospital => {
@@ -23,4 +24,15 @@ hosptialRouter.route('/profile/:id')
   });
 });
 
-module.exports = hosptialRouter;
+hospitalRouter.route('/geo')
+.get((req, res) => {
+  let queries = url.parse(req.url, true).query;
+
+  Hospital.findAll({where: {
+    latitude: {$gt: queries.minLat, $lt: queries.maxLat},
+    longitude: {$gt: queries.minLong, $lt: queries.maxLong}
+  }})
+  .then(hospitals => res.send(hospitals));
+});
+
+module.exports = hospitalRouter
