@@ -126,7 +126,7 @@ module.exports = {
   },
 
   addEvent: (req, res) => {
-    fs.readFile('client_secret.json', (err, content) => {
+    fs.readFile(__dirname + '/client_secret.json', (err, content) => {
       if (err) {
         console.log('Error loading client secret file: ' + err);
         return res.send(404);
@@ -141,7 +141,7 @@ module.exports = {
             console.log('There was an error contacting the Calendar service: ' + err);
             return res.send(404);
           }
-          res.send('event created!');
+          return res.status(201).send('event created!');
         });
       });
     });
