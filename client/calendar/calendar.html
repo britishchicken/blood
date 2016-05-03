@@ -1,5 +1,24 @@
 <div id="calendar-container">
-  <h3>Calendar</h3>
+  <h3>Schedule an Appointment!</h3>
+  <form ng-submit="CalendarCtrl.createEvent()">
+    <p>
+      Choose a date: <input type="date" ng-model="CalendarCtrl.dateTime"/>
+      <button>Schedule it!</button>
+    </p>
+  </form>
+  <p>
+    If you deleted an event from your calendar, click
+    <button ng-click="CalendarCtrl.reloadRoute()">refresh</button>
+  </p>
+  <div id="calendar"></div>
+  <script type='text/javascript'>
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        events: '/api/calendar/'
+      });
+    });
+  </script>
+  <!-- <h3>Calendar</h3>
   <div id="calendar-summary">
     <p>Account: <b>{{CalendarCtrl.events.summary}}</b></p>
     <p>Updated: <b>{{CalendarCtrl.events.updated}}</b></p>
@@ -26,5 +45,5 @@
       <p><b>start:</b> {{item.start.dateTime}}</p>
       <p><b>end:</b> {{item.end.dateTime}}</p>
     </div>
-  </div>
+  </div> -->
 </div>

@@ -1,5 +1,5 @@
 (() => {
-  app.controller('CalendarController', ['$http', function($http) {
+  app.controller('CalendarController', ['$http', '$window', function($http, $window) {
     // let CalendarCtrl = this;
     // let CLIENT_ID = '201136918452-keglqvefmnl0gf5thj0lsp4o720v5f7v.apps.googleusercontent.com';
     // const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
@@ -76,27 +76,67 @@
     //   }
 
     // }
+
     let CalendarCtrl = this;
+
+    CalendarCtrl.reloadRoute = () => {
+      console.log('hi');
+      $window.location.reload();
+    };
+
     CalendarCtrl.showAllEvents = () => {
       $http({
         method: 'GET',
         url: '/api/calendar/'
       })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         CalendarCtrl.events = res.data;
-        console.log(CalendarCtrl.events);
+        // console.log(CalendarCtrl.events);
       });
     };
 
     CalendarCtrl.createEvent = () => {
       $http({
         method: 'POST',
-        url: '/api/calendar/'
+        url: '/api/calendar/',
+        data: {
+          summary: 'Blood',
+          location: '800 Howard St., San Francisco, CA 94103',
+          description: 'A chance to hear more about Google\'s developer products.',
+          start: {
+            dateTime: CalendarCtrl.dateTime,
+            timeZone: 'America/Los_Angeles',
+          },
+          'end': {
+            'dateTime': CalendarCtrl.dateTime,
+            'timeZone': 'America/Los_Angeles',
+          },
+          // recurrence: [
+          //   RRULE:FREQ=DAILY;COUNT=2
+          // ],
+          // 'attendees': [
+          //   {'email': 'lpage@example.com'},
+          //   {'email': 'sbrin@example.com'},
+          // ],
+          // 'reminders': {
+          //   'useDefault': false,
+          //   'overrides': [
+          //     {'method': 'email', 'minutes': 24 * 60},
+          //     {'method': 'popup', 'minutes': 10},
+          //   ],
+          // },
+        }
+      })
+      .then((res) => {
+        if (res.status === 201) {
+          console.log('hi');
+          $window.location.assign('/#calendar');
+        }
       });
     };
 
 
-    CalendarCtrl.showAllEvents();
+    // CalendarCtrl.showAllEvents();
   }]);
 })();
