@@ -10,7 +10,7 @@ let calendar = google.calendar('v3');
 // at ~/.credentials/calendar-nodejs-quickstart.json
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 const TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + '/.credentials/';
-const TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
+const TOKEN_PATH = TOKEN_DIR + '/calendar-nodejs-quickstart.json';
 
 let authorize = (credentials, callback) => {
   let clientSecret = credentials.installed.client_secret;
@@ -76,7 +76,7 @@ let storeToken = (token) => {
 
 module.exports = {
   showEvents: (req, res) => {
-    fs.readFile('client_secret.json', (err, content) => {
+    fs.readFile(__dirname + '/client_secret.json', (err, content) => {
       if (err) {
         console.log('Error loading client secret file: ' + err);
         return res.send(404);
@@ -105,7 +105,20 @@ module.exports = {
           //     console.log('%s - %s', start, event.summary);
           //     retArray.push(start + ' - ' + event.summary);
           //   }
-            return res.send(response);
+          let retArray = [];
+          response.items.forEach((item) => {
+            let obj = {};
+            obj.title = item.summary;
+            obj.kind = item.kind;
+            obj.etag = item.etag;
+            obj.id = item.id;
+            obj.status = item.status;
+            obj.url = item.htmlLink;
+            obj.start = item.start.dateTime;
+            obj.end = item.end.dateTime;
+            retArray.push(obj);
+          });
+          return res.send(retArray);
           // }
         });
       });
