@@ -19,6 +19,7 @@
     "angular": "^1.5.5",
     "angular-mocks": "^1.5.5",
     "angular-route": "^1.5.5",
-    "normalize-css": "^4.1.1"
+    "normalize-css": "^4.1.1",
+    "fullcalendar": "^2.7.1"
   }
 }

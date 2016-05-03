@@ -48,6 +48,11 @@ let app = angular.module('blood', ['ngRoute'])
   .when('/splash', {
     templateUrl: 'splash/splash.html'
   })
+  .when('/calendar', {
+    templateUrl: 'calendar/calendar.html',
+    controller: 'CalendarController',
+    controllerAs: 'CalendarCtrl'
+  })
   .otherwise({
       redirectTo: '/'
   });
