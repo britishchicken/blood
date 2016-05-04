@@ -31,7 +31,7 @@ app.controller('StockController', ['$routeParams', '$http', function($routeParam
   StockCtrl.xAxis = 'Types';
 
   StockCtrl.maxType = 'opos';
-  StockCtrl.max = 0;
+  StockCtrl.max = 200;
 
   StockCtrl.put = (data) => {
     return $http({
@@ -50,11 +50,12 @@ app.controller('StockController', ['$routeParams', '$http', function($routeParam
       url: '/api/hospital/profile',
     })
     .then((res) => {
+      StockCtrl.max = 0;
       for(key in res.data){
         if(StockCtrl.levels[key]){
           StockCtrl.levels[key] = res.data[key];
         }
-        if (StockCtrl.levels[key] > StockCtrl.max ){
+        if (StockCtrl.levels[key] > StockCtrl.max){
           StockCtrl.max = StockCtrl.levels[key];
         }
       }
@@ -67,7 +68,7 @@ app.controller('StockController', ['$routeParams', '$http', function($routeParam
   }
 
   for (key in StockCtrl.levels ) {
-    if (StockCtrl.levels[key] > StockCtrl.max) {
+    if (StockCtrl.levels[key] > StockCtrl.max ) {
       StockCtrl.max = StockCtrl.levels[key];
     }
   }
