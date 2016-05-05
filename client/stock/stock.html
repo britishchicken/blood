@@ -2,16 +2,15 @@
   Hello, Hospital! Here are the current blood stock levels we have for your hospital.
 
   Need to make an update? Click on a bar to select that type, then edit it here: 
-  
+  <a href="" ng-click="StockCtrl.test()">Test Stuff</a>
     <div style='text-align: center;'>
       {{StockCtrl.currentSelectedType}} 
     </div>
     <input type="text" ng-model="StockCtrl.setLevel" />
     <button ng-click="StockCtrl.setTypeLevel()" type="button">Set Level</button>
-
 </div>
 
-  <div class='chart' style='width: 550px; height: 300px;'>
+<!--   <div class='chart' style='width: 550px; height: 300px;'>
     <div class='chartYAxis' style='width: 400px;'>{{StockCtrl.yAxis}}</div>
     <div class='chartXAxis'> {{StockCtrl.xAxis}} </div>
     <div ng-repeat='(key, value) in StockCtrl.levels' ng-click='StockCtrl.handleClick(this.key)' class='chartBar'
@@ -23,3 +22,7 @@
       </div>
     </div>
   </div>
+ -->
+  <div>
+    <nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
+</div>

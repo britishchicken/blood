@@ -1,4 +1,4 @@
-let app = angular.module('blood', ['ngRoute'])
+let app = angular.module('blood', ['ngRoute', 'nvd3'])
 
 .config(function ($routeProvider, $httpProvider) {
   $routeProvider
