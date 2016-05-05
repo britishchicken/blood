@@ -33,6 +33,7 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
                     //chartClick: function(e) {console.log("! chart Click !")},
                     elementClick: function(e) {
                       StockCtrl.currentSelectedType = e.data.label;
+                      $scope.$apply();
                       // console.log(StockCtrl.currentSelectedType);
                     }
                   }
