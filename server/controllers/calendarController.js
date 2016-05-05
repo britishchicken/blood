@@ -1,14 +1,8 @@
 'use strict'
-const CLIENT_ID = process.env.calendarid;
-const CLIENT_SECRET = process.env.calendarsecret;
-const REDIRECT_URL = process.env.calendarurl
-
 let google = require('googleapis');
-let calendar = google.calendar('v3');
-let OAuth2 = google.auth.OAuth2;
-let oauth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
 let googleAuth = require('google-auth-library');
 let auth = new googleAuth();
+let calendar = google.calendar('v3');
 
 module.exports = {
   showEvents: (req, res) => {
@@ -23,7 +17,8 @@ module.exports = {
       orderBy: 'startTime'
     }, (err, response) => {
       if (err) {
-        return console.error('The API returned an error: ' + err);
+        console.error('The API returned an error: ' + err);
+        return res.send(404);
       }
       let events = response.items;
       if (events.length == 0) {
