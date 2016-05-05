@@ -23,6 +23,7 @@
     "chai-as-promised": "^5.3.0",
     "cookie-parser": "^1.4.1",
     "cookieparser": "^0.1.0",
+    "d3": "^3.5.16",
     "es6-shim": "^0.35.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
