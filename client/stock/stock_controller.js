@@ -123,10 +123,6 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
     });
   };
 
-  StockCtrl.handleClick = (keyName) => {
-    StockCtrl.currentSelectedType = keyName;
-  }
-
   StockCtrl.setTypeLevel = (type) => {
 
     for( i = 0; i < $scope.data[0].values.length; i++) {
@@ -143,10 +139,6 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
   }
 
   StockCtrl.get();
-
-  StockCtrl.test = () => {
-    console.log('type: ', StockCtrl.currentSelectedType);
-  }
 
 }]);
 
