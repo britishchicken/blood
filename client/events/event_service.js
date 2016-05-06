@@ -10,5 +10,14 @@ app.factory('Event', ['$http', function($http) {
     });
   };
 
-  return {get};
+  let join = (eventId) => {
+    return $http({
+      method: 'POST',
+      url: `/api/event/${eventId}`
+    }).then(res => {
+      return res.data;
+    });
+  };
+
+  return {get, join};
 }]);

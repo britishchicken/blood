@@ -16,6 +16,21 @@ eventRouter.route('/:id')
   .then(event => {
     res.send(event);
   });
+})
+.post((req, res) => {
+  Promise.all([
+    Event.findOne({
+      where: {
+        id: req.params.id
+      }
+    }),
+    Donor.findOne({
+      where: {
+        id: req.user.id
+      }
+    })]).then((event, donor) => {
+    event.addDonor(donor);
+  });
 });
 
 module.exports = eventRouter;

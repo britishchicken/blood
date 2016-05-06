@@ -70,8 +70,7 @@ let Event = sequelize.define('event', {
 });
 
 Event.belongsTo(Hospital);
-Event.hasMany(Donor, {as: 'Donors'});
-
+Event.belongsToMany(Donor, {through: 'donorsevents'});
 
 Post.belongsTo(Hospital);
 
