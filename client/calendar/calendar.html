@@ -13,10 +13,18 @@
       <button>Schedule it!</button>
     </p>
   </form>
+ 
   <p>
     If you deleted an event from your calendar, click
     <button ng-click="CalendarCtrl.reload()">refresh</button>
   </p>
+
   <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button>
+
+  <div class="fb-share-button" 
+    data-href="http://52.39.22.12:8080/#/" 
+    data-layout="button_count">
+ </div>
+
   <div id="calendar"></div>
 </div>
