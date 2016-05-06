@@ -5,6 +5,8 @@
 
 
     $calendar.fullCalendar({
+      timezone: 'local',
+      displayEventEnd: true,
       events: '/api/calendar'
     });
 
@@ -60,13 +62,37 @@
 
     CalendarCtrl.automateDates = () => {
       $http.get(`api/hospital/profile/${$routeParams.hospitalid}`).then(res => {
-        // let id = res.id;
         console.log(res.data);
-        // $calendar.fullCalendar('addEventSource', [
-        //   {
 
-        //   }
-        // ]);
+        var current = new Date()
+        var day;
+        var dayIndex;
+        var startHour;
+        var endHour;
+
+        var array = [];
+        for (var i = 0; i < 28; i++) {
+
+          current = new Date(current.getTime() + (1000 * 60 * 60 * 24));
+          day = current.getDay();
+          dayIndex = ( (day + 7) - 1 ) % 7;
+
+          if (res.data.schedules[dayIndex].openhours) {
+            startHour = res.data.schedules[dayIndex].openhours;
+            endHour = res.data.schedules[dayIndex].closehours;
+            array.push({
+              title: 'Schedule an appointment!',
+              start: current.setHours(startHour,0,0,0),
+              end: current.setHours(endHour,0,0,0),
+            });
+          }
+        }
+
+
+        $calendar.fullCalendar('addEventSource', {
+          events: array,
+          backgroundColor: '#378006'
+        });
         
       });
     }
