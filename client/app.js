@@ -11,14 +11,14 @@ let app = angular.module('blood', ['ngRoute', 'nvd3'])
   })
 
   .when('/profile', {
-      templateUrl: 'profile/profile.html',
-      controller: 'ProfileController',
-      controllerAs: 'ProfileCtrl'
+    templateUrl: 'profile/profile.html',
+    controller: 'ProfileController',
+    controllerAs: 'ProfileCtrl'
   })
   .when('/profile/:donorid', {
-      templateUrl: '/profile/profile_public.html',
-      controller: 'ProfileController',
-      controllerAs: 'ProfileCtrl'
+    templateUrl: '/profile/profile_public.html',
+    controller: 'ProfileController',
+    controllerAs: 'ProfileCtrl'
   })
   .when('/hospital/signup', {
     templateUrl: 'hospital_auth/signup/signup.html',
@@ -68,9 +68,12 @@ let app = angular.module('blood', ['ngRoute', 'nvd3'])
     controller: 'CalendarController',
     controllerAs: 'CalendarCtrl'
   })
+  .when('/event/:eventId', {
+    templateUrl: 'events/event.html',
+    controller: 'EventController',
+    controllerAs: 'EventCtrl'
+  })
   .otherwise({
-      redirectTo: '/'
+    redirectTo: '/'
   });
-
-
 });

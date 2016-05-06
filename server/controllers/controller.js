@@ -65,6 +65,16 @@ Post.belongsTo(Hospital);
 Hospital.hasMany(Schedule);
 Schedule.belongsTo(Hospital);
 
+let Event = sequelize.define('event', {
+  time: Sequelize.DATE,
+});
+
+Event.belongsTo(Hospital);
+Event.hasMany(Donor, {as: 'Donors'});
+
+
+Post.belongsTo(Hospital);
+
 sequelize.sync();
 
 module.exports.Donor = Donor;
@@ -72,3 +82,4 @@ module.exports.Hospital = Hospital;
 module.exports.Post = Post;
 module.exports.Review = Review;
 module.exports.Schedule = Schedule;
+module.exports.Event = Event;
