@@ -63,6 +63,11 @@ let app = angular.module('blood', ['ngRoute', 'nvd3'])
     controller: 'CalendarController',
     controllerAs: 'CalendarCtrl'
   })
+  .when('/hospital/calendar/:hospitalid', {
+    templateUrl: '/calendar/calendar.html',
+    controller: 'CalendarController',
+    controllerAs: 'CalendarCtrl'
+  })
   .otherwise({
       redirectTo: '/'
   });
