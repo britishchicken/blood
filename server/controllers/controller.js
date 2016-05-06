@@ -1,7 +1,9 @@
 'use strict'
 
+let config = require('../../serverconfig.js');
+
 let Sequelize = require('sequelize');
-let sequelize = new Sequelize('blood', process.env.sqluid, process.env.sqlpw);
+let sequelize = new Sequelize('blood', config.sqluid, config.sqlpw);
 
 let Donor = sequelize.define('donor', {
   username: Sequelize.STRING,
@@ -39,6 +41,14 @@ let Hospital = sequelize.define('hospital', {
   abneg: {type: Sequelize.INTEGER, defaultValue: 20},
 });
 
+let Review = sequelize.define('review', {
+  content: Sequelize.TEXT('long'),
+  rating: Sequelize.INTEGER
+});
+
+Review.belongsTo(Donor);
+Review.belongsTo(Hospital);
+
 let Post = sequelize.define('post', {
   content: Sequelize.TEXT('medium'),
   latitude: Sequelize.FLOAT,
@@ -53,3 +63,4 @@ sequelize.sync();
 module.exports.Donor = Donor;
 module.exports.Hospital = Hospital;
 module.exports.Post = Post;
+module.exports.Review = Review;

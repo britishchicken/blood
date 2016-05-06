@@ -55,5 +55,20 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
     });
   };
 
+  HospitalProfileCtrl.reviews = [];
+  let getReviews = () => {
+    if (HospitalProfileCtrl.id) {
+      HospitalProfile.getReviews(HospitalProfileCtrl.id)
+      .then(reviews => HospitalProfileCtrl.reviews = reviews);
+    }
+  };
+
+
+  HospitalProfileCtrl.submitReview = () => {
+    HospitalProfile.postReview(HospitalProfileCtrl.id, HospitalProfileCtrl.reviewContent)
+    .then(getReviews);
+  };
+
   displayHospital();
+  getReviews();
 }]);

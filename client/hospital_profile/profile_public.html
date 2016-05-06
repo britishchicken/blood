@@ -6,4 +6,17 @@
     <li>Lat: {{HospitalProfileCtrl.editObj.latitude}} </li>
     <li>Long: {{HospitalProfileCtrl.editObj.longitude}} </li>
   </ul>
+  <div class="reviews">
+  <div class="new-review">
+    <form ng-submit="HospitalProfileCtrl.submitReview()">
+      <textarea ng-model="HospitalProfileCtrl.reviewContent"></textarea>
+      <input type="submit">
+    </form>
+  </div>
+  <h2 ng-show="{{HospitalProfileCtrl.reviews.length}}">Reviews:</h2>
+    <div class="review" ng-repeat="review in HospitalProfileCtrl.reviews">
+      <h3>{{review.donor.name}}</h3>
+      <p>{{review.content}}</p>
+    </div>
+  </div>
 </div>

@@ -2,6 +2,8 @@
 let hospitalRouter = require('express').Router();
 let controllers = require('../controllers/controller.js');
 let Hospital = controllers.Hospital;
+let Donor = controllers.Donor;
+let Review = controllers.Review;
 let url = require('url');
 
 hospitalRouter.route('/profile')
@@ -35,6 +37,25 @@ hospitalRouter.route('/geo')
   .then(hospitals => {
     res.send(hospitals);
   });
+});
+
+hospitalRouter.route('/:id/reviews')
+.get((req, res) => {
+  Review.findAll({
+    where: {hospitalId: req.params.id},
+    include: [Donor],
+    order: 'createdAt DESC'
+  })
+  .then(reviews => res.send(reviews));
+})
+.post((req, res) => {
+  Review.create({
+    hospitalId: req.params.id,
+    donorId: req.user.id,
+    content: req.body.content,
+    stars: req.body.stars
+  })
+  .then(review => res.send(review));
 });
 
 module.exports = hospitalRouter;
