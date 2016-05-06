@@ -1,6 +1,12 @@
 (() => {
-  app.controller('CalendarController', ['$http', '$window', function($http, $window) {
+  app.controller('CalendarController', ['$http', '$window', '$routeParams', function($http, $window, $routeParams) {
     let CalendarCtrl = this;
+    let $calendar = $('#calendar');
+
+
+    $calendar.fullCalendar({
+      events: '/api/calendar'
+    });
 
     CalendarCtrl.googleLogin = () => {
       $http.get('/auth/url').then(res => {
@@ -16,28 +22,16 @@
 
           $http.get('/auth/googleToken?code=' + code).then(res => {
             console.log('You are authenticated!');
-            $window.location.assign('#calendar');
+            $calendar.fullCalendar('refetchEvents');
+
           });
         };
       });
     }
 
     CalendarCtrl.reload = () => {
-      $window.location.assign('#calendar');;
+      $calendar.fullCalendar('refetchEvents');
     };
-
-    // CalendarCtrl.showAllEvents = () => {
-    //   $http({
-    //     method: 'GET',
-    //     url: '/api/calendar/'
-    //   })
-    //   .then(res => {
-    //     CalendarCtrl.events = res.data;
-    //   })
-    //   .catch(err => {
-    //     // console.log('tehre is an error!');
-    //   });
-    // };
 
     CalendarCtrl.createEvent = () => {
       $http({
@@ -52,18 +46,30 @@
             timeZone: 'America/Los_Angeles',
           },
           end: {
-            'dateTime': CalendarCtrl.dateTime,
-            'timeZone': 'America/Los_Angeles',
-          },
+            dateTime: CalendarCtrl.dateTime,
+            timeZone: 'America/Los_Angeles'
+          }
         }
       })
       .then((res) => {
         if (res.status === 201) {
-          console.log('hi');
-          $window.location.assign('#calendar');
+          $calendar.fullCalendar('refetchEvents');
         }
       });
     };
+
+    CalendarCtrl.automateDates = () => {
+      $http.get(`api/hospital/profile/${$routeParams.hospitalid}`).then(res => {
+        // let id = res.id;
+        console.log(res.data);
+        // $calendar.fullCalendar('addEventSource', [
+        //   {
+
+        //   }
+        // ]);
+        
+      });
+    }
 
 
     // CalendarCtrl.showAllEvents();

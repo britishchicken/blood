@@ -17,12 +17,13 @@
     If you deleted an event from your calendar, click
     <button ng-click="CalendarCtrl.reload()">refresh</button>
   </p>
+  <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button>
   <div id="calendar"></div>
-  <script type='text/javascript'>
+<!--   <script type='text/javascript'>
     $(document).ready(function() {
       $('#calendar').fullCalendar({
         events: '/api/calendar/'
       });
     });
-  </script>
+  </script> -->
 </div>
