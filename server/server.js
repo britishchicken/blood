@@ -9,6 +9,9 @@ let session = require('express-session');
 let app = express();
 let auth = require('./routes/auth');
 let passport = auth.passport;
+let http = require('http');
+let https = require('https');
+let fs = require('fs');
 
 /* Routes */
 let profileRouter = require('./routes/profile.js');
@@ -35,6 +38,24 @@ app.use('/api/calendar', calendarRouter);
 app.use('/api/post', postRouter);
 app.use('/auth', authRouter);
 
-app.listen(8080, () => {
-  console.log('Blood app listening on port 8080!');
+let options = {
+  key: fs.readFileSync('../tls/key.pem'),
+  cert: fs.readFileSync('../tls/cert.pem'),
+  ca: fs.readFileSync('../tls/fullchain.pem')
+};
+
+let server = https.createServer(options, app);
+
+server.listen(8000);
+
+var redirectApp = express () ,
+redirectServer = http.createServer(redirectApp);
+
+redirectApp.use(function requireHTTPS(req, res, next) {
+  if (!req.secure) {
+    return res.redirect('https://' + req.headers.host + req.url);
+  }
+  next();
 });
+
+redirectServer.listen(8080);
