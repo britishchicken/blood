@@ -42,6 +42,7 @@ module.exports = {
   },
 
   addEvent: (req, res) => {
+    console.log('hiiii');
     calendar.events.insert({
       auth: google._options.auth,
       calendarId: 'primary',

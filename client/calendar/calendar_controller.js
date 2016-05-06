@@ -3,11 +3,17 @@
     let CalendarCtrl = this;
     let $calendar = $('#calendar');
 
+    $calendar.possibleEvents = [];
 
     $calendar.fullCalendar({
       timezone: 'local',
       displayEventEnd: true,
-      events: '/api/calendar'
+      events: '/api/calendar',
+      eventClick: (calEvent, jsEvent, view) => {
+        if (calEvent.title === 'Schedule an appointment!') {
+          CalendarCtrl.createEvent(calEvent.start, calEvent.end);
+        }
+      }
     });
 
     CalendarCtrl.googleLogin = () => {
@@ -35,7 +41,10 @@
       $calendar.fullCalendar('refetchEvents');
     };
 
-    CalendarCtrl.createEvent = () => {
+    CalendarCtrl.createEvent = (startDate, endDate) => {
+      startDate = startDate || CalendarCtrl.dateTime;
+      endDate = endDate || CalendarCtrl.dateTime;
+
       $http({
         method: 'POST',
         url: '/api/calendar/',
@@ -44,11 +53,11 @@
           location: '800 Howard St., San Francisco, CA 94103',
           description: 'A chance to hear more about Google\'s developer products.',
           start: {
-            dateTime: CalendarCtrl.dateTime,
+            dateTime: startDate,
             timeZone: 'America/Los_Angeles',
           },
           end: {
-            dateTime: CalendarCtrl.dateTime,
+            dateTime: endDate,
             timeZone: 'America/Los_Angeles'
           }
         }
@@ -56,6 +65,8 @@
       .then((res) => {
         if (res.status === 201) {
           $calendar.fullCalendar('refetchEvents');
+          $calendar.fullCalendar('removeEventSource', $calendar.possibleEvents);
+          $calendar.possibleEvents = [];
         }
       });
     };
@@ -83,16 +94,17 @@
             array.push({
               title: 'Schedule an appointment!',
               start: current.setHours(startHour,0,0,0),
-              end: current.setHours(endHour,0,0,0),
+              end: current.setHours(endHour,0,0,0)
             });
           }
         }
-
 
         $calendar.fullCalendar('addEventSource', {
           events: array,
           backgroundColor: '#378006'
         });
+
+        $calendar.possibleEvents = array;
         
       });
     }
