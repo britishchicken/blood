@@ -6,6 +6,11 @@ let calendar = google.calendar('v3');
 
 module.exports = {
   showEvents: (req, res) => {
+    if (!google._options.auth) {
+      console.log('no auth!');
+      return res.send(404);
+    }
+
     let now = new Date();
 
     calendar.events.list({
@@ -42,7 +47,6 @@ module.exports = {
   },
 
   addEvent: (req, res) => {
-    console.log('hiiii');
     calendar.events.insert({
       auth: google._options.auth,
       calendarId: 'primary',
