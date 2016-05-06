@@ -1,15 +1,15 @@
-<div id="container">
+<div id='container'>
   <div style="text-align: center;">This page is private. It is not visible to others.</div>
   <div class="col-lg-10 col-lg-offset-1" >
     <div class="col-md-8">
       <div class="panel-body">
-        <div class="col-md-3"> 
-          <img ng-src="{{ProfileCtrl.user.photo}}" class="img-circle center-block img-profile"/> 
+        <div class="col-md-3">
+          <img ng-src="{{ProfileCtrl.user.photo}}" class="img-circle center-block img-profile"/>
         </div>
-        <div class="col-md-3 userInfo-table"> 
+        <div class="col-md-3 userInfo-table">
           <div ng-hide="ProfileCtrl.edit" class="table table-user-information">
             <div>
-              <span style="color: #6e99e1;">Username:</span> 
+              <span style="color: #6e99e1;">Username:</span>
               <span>{{ProfileCtrl.user.username}}</span>
             </div>
             <div>
@@ -41,10 +41,10 @@
                 <span>E-mail:</span>
                 <br />
                 <input type="email" ng-model="ProfileCtrl.user.email" /><br />
-                <span>Location:</span> 
+                <span>Location:</span>
                 <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/>
                 <br />
-                <span>Blood Type:</span> 
+                <span>Blood Type:</span>
                 <input type="text" ng-model="ProfileCtrl.user.bloodtype" />
                 <br />
                 <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
@@ -87,7 +87,7 @@
       </div>
     </div>
     <div class="col-md-4 friend-col-outer center-block">
-      <div class="col-md-3 pull-left friends-col"> 
+      <div class="col-md-3 pull-left friends-col">
         <div class="table friends-table table-condensed">
           <div>
             <span>Friends:</span>
