@@ -4,6 +4,7 @@ let controllers = require('../controllers/controller.js');
 let Hospital = controllers.Hospital;
 let Donor = controllers.Donor;
 let Review = controllers.Review;
+let Schedule = controllers.Schedule;
 let url = require('url');
 
 hospitalRouter.route('/profile')
@@ -20,7 +21,7 @@ hospitalRouter.route('/profile')
 
 hospitalRouter.route('/profile/:id')
 .get((req, res) => {
-  Hospital.findOne({where: {id: req.params.id}})
+  Hospital.findOne({where: {id: req.params.id}, include: [Schedule]})
   .then(hospital => {
     res.send(hospital);
   });
@@ -32,7 +33,7 @@ hospitalRouter.route('/geo')
   Hospital.findAll({where: {
     latitude: {$gt: queries.minLat, $lt: queries.maxLat},
     longitude: {$gt: queries.minLong, $lt: queries.maxLong}
-  }})
+  }, include: [Schedule]})
 
   .then(hospitals => {
     res.send(hospitals);

@@ -27,8 +27,6 @@ let Hospital = sequelize.define('hospital', {
   email: Sequelize.STRING,
   photo: Sequelize.STRING,
   phonenum:Sequelize.INTEGER,
-  openhours:Sequelize.INTEGER,
-  closehours: Sequelize.INTEGER,
   hospitalurl:Sequelize.STRING,
   latitude: Sequelize.FLOAT,
   longitude: Sequelize.FLOAT,
@@ -50,6 +48,12 @@ let Review = sequelize.define('review', {
 Review.belongsTo(Donor);
 Review.belongsTo(Hospital);
 
+let Schedule = sequelize.define('schedule', {
+  day: Sequelize.INTEGER,
+  openhours: Sequelize.INTEGER,
+  closehours: Sequelize.INTEGER
+});
+
 let Post = sequelize.define('post', {
   content: Sequelize.TEXT('medium'),
   latitude: Sequelize.FLOAT,
@@ -58,6 +62,8 @@ let Post = sequelize.define('post', {
 
 Post.belongsTo(Donor);
 Post.belongsTo(Hospital);
+Hospital.hasMany(Schedule);
+Schedule.belongsTo(Hospital);
 
 sequelize.sync();
 
@@ -65,3 +71,4 @@ module.exports.Donor = Donor;
 module.exports.Hospital = Hospital;
 module.exports.Post = Post;
 module.exports.Review = Review;
+module.exports.Schedule = Schedule;
