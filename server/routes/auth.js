@@ -61,7 +61,7 @@ authRouter.route('/googleToken')
 passport.use(new FacebookStrategy({
   clientID: config.fbapikey,
   clientSecret: config.fbapisecret,
-  callbackURL: 'http://52.39.22.12:8080/auth/facebook/callback',
+  callbackURL: 'https://bloodshare.io/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
 },
 function(accessToken, refreshToken, profile, done) {
