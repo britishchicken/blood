@@ -1,13 +1,13 @@
 <div class="container map-page">
   <div class="blooodmap col-md-8">
-    <div id="googleMap" style="position: relative;"></div>    
+    <div id="googleMap" style="position: relative;"></div>
       <div id='floating-panel'><nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
       </div>
   </div>
   <div class="feed col-md-4" ng-controller="FeedController as FeedCtrl">
     <div class="feed-new">
       <label for="post-content">Send a message!</label>
-      <form ng-submit="feedCtrl.submit()">
+      <form ng-submit="FeedCtrl.submit()">
         <input name="post-content" id="post-content" type="text" ng-model="FeedCtrl.content">
         <input type="submit">
       </form>

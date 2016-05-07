@@ -3,7 +3,7 @@
 let config = require('../../serverconfig.js');
 
 let Sequelize = require('sequelize');
-let sequelize = new Sequelize('blood', config.sqluid, config.sqlpw);
+let sequelize = new Sequelize('blood', config.sqluid, config.sqlpw, {logging: false});
 
 let Donor = sequelize.define('donor', {
   username: Sequelize.STRING,
