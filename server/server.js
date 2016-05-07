@@ -20,6 +20,7 @@ let hospitalRouter = require('./routes/hospital.js');
 let postRouter = require('./routes/post.js');
 let authRouter = auth.authRouter;
 let calendarRouter = require('./routes/calendar.js');
+let eventRouter = require('./routes/event.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -37,6 +38,7 @@ app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
 app.use('/api/calendar', calendarRouter);
 app.use('/api/post', postRouter);
+app.use('/api/event', eventRouter);
 app.use('/auth', authRouter);
 
 if (config.production) {

@@ -5,7 +5,10 @@ app.controller('EventController', ['$routeParams', 'Event', function($routeParam
 
   let getEvent = () => {
     Event.get($routeParams.eventId)
-    .then(event => EventCtrl.event = event);
+    .then(event => {
+      EventCtrl.event = event;
+    console.log(event);
+  });
   };
 
   EventCtrl.join = () => {

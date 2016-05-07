@@ -17,6 +17,7 @@ let Donor = sequelize.define('donor', {
   longitude: Sequelize.FLOAT,
   bloodtype: Sequelize.STRING,
   lastcontacted: Sequelize.DATE,
+  latestappointment: Sequelize.DATE
 });
 
 let Hospital = sequelize.define('hospital', {
@@ -54,6 +55,9 @@ let Schedule = sequelize.define('schedule', {
   closehours: Sequelize.INTEGER
 });
 
+Hospital.hasMany(Schedule);
+Schedule.belongsTo(Hospital);
+
 let Post = sequelize.define('post', {
   content: Sequelize.TEXT('medium'),
   latitude: Sequelize.FLOAT,
@@ -62,8 +66,6 @@ let Post = sequelize.define('post', {
 
 Post.belongsTo(Donor);
 Post.belongsTo(Hospital);
-Hospital.hasMany(Schedule);
-Schedule.belongsTo(Hospital);
 
 let Event = sequelize.define('event', {
   time: Sequelize.DATE,

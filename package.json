@@ -20,6 +20,7 @@
     "angular-nvd3": "^1.0.7",
     "babel": "^6.5.2",
     "bcrypt": "^0.8.6",
+    "bluebird": "^3.3.5",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "cookie-parser": "^1.4.1",

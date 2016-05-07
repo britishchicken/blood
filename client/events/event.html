@@ -1,6 +1,13 @@
 <div>
-  {{EventCtrl.event}}
+  <h2>{{EventCtrl.event.hospital.name}}</h2>
+  <h3>{{EventCtrl.event.time | date:'medium'}}</h3>
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#confirm-modal">Join this event</button>
+  <div class="donors">
+    <div class="donor" ng-repeat="donor in event.donors">
+      <img ng-src="{{donor.photo}}" alt="Profile Photo">
+      <h4>{{donor.name}}</h4>
+    </div>
+  </div>
 
   <!-- Modal -->
   <div class="modal fade" id="confirm-modal" role="dialog">

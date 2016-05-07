@@ -2,8 +2,7 @@ app.factory('Event', ['$http', function($http) {
   let get = (eventId) => {
     return $http({
       method: 'GET',
-      url: '/api/event',
-      params: {eventId}
+      url: `/api/event/${eventId}`
     })
     .then((res) => {
       return res.data;
@@ -14,8 +13,6 @@ app.factory('Event', ['$http', function($http) {
     return $http({
       method: 'POST',
       url: `/api/event/${eventId}`
-    }).then(res => {
-      return res.data;
     });
   };
 
