@@ -8,7 +8,7 @@ app.controller('FeedController', function($scope, Feed) {
 
   let updatePosts = () => {
     let lastUpdated = FeedCtrl.posts.length ? FeedCtrl.posts[0].createdAt : 0;
-    Feed.get($scope.minLat, $scope.minLong, $scope.maxLat, $scope.maxLong, lastUpdated)
+    Feed.get($scope.bounds.H.H, $scope.bounds.j.j, $scope.bounds.H.j, $scope.bounds.j.H, lastUpdated)
     .then(posts => FeedCtrl.posts = posts.concat(FeedCtrl.posts));
   };
   setInterval(updatePosts, 5000);
