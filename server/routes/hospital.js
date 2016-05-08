@@ -34,7 +34,6 @@ hospitalRouter.route('/geo')
     latitude: {$gt: queries.minLat, $lt: queries.maxLat},
     longitude: {$gt: queries.minLong, $lt: queries.maxLong}
   }, include: [Schedule]})
-
   .then(hospitals => {
     res.send(hospitals);
   });

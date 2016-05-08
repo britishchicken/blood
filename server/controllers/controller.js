@@ -3,7 +3,7 @@
 let config = require('../../serverconfig.js');
 
 let Sequelize = require('sequelize');
-let sequelize = new Sequelize('blood', config.sqluid, config.sqlpw, {logging: false});
+let sequelize = new Sequelize('blood', config.sqluid, config.sqlpw, {logging: true});
 
 let Donor = sequelize.define('donor', {
   username: Sequelize.STRING,
@@ -72,9 +72,8 @@ let Event = sequelize.define('event', {
 });
 
 Event.belongsTo(Hospital);
+Hospital.hasMany(Event);
 Event.belongsToMany(Donor, {through: 'donorsevents'});
-
-Post.belongsTo(Hospital);
 
 sequelize.sync();
 
