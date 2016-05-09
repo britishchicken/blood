@@ -1,3 +1,9 @@
+h1, h2, h3, h4, h5, p, div {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
 .bg-primary {
   background-color: #700000;
 }
@@ -209,24 +215,24 @@ header {
  background-color:#700000 ;
  color: white;
 
- }
+}
 
- .btn-default {
-    color: #fff;
-    background-color:#595959;
-    border-color: #700000;
-    text-align: center;
-  }
+.btn-default {
+  color: #fff;
+  background-color:#595959;
+  border-color: #700000;
+  text-align: center;
+}
 
- .iw_title, .iw_content{
+.iw_title, .iw_content{
   width:240;
- }
+}
 
- #iw_container .iw_content{
+#iw_container .iw_content{
   font-family: 'Open Sans Condensed', sans-serif;
- font-size: 11px;
+  font-size: 11px;
 
- }
+}
 
 
 .gm-style-iw {
@@ -241,9 +247,34 @@ header {
 
 }
 .gm-style-iw {
-   overflow: hidden !important;
-   line-height: 1.35;
-   white-space: nowrap;
+ overflow: hidden !important;
+ line-height: 1.35;
+ white-space: nowrap;
+}
+
+.events {
+  margin-top: 20px;
+  border: 1px solid #333;
+  background-color: rgba(0, 0, 0, 0.8);
+  min-height: 20vh;
+  padding: 10px 20px;
+  color: white;
+}
+
+.event {
+  padding: 10px 0;
+}
+
+.event:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.event h5 {
+  margin-bottom: 10px;
+}
+
+.event img {
+  width: 40px;
 }
 
 /* ----------------------------- */
@@ -273,10 +304,10 @@ header {
   border: 0px;
 }
 .panel-info > .panel-heading {
-    color: white;
-    background-color: #700000;
-    font-family: 'Lato', sans-serif;
-    text-align: center;
+  color: white;
+  background-color: #700000;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
 }
 
 .panel-heading > h3 {
@@ -314,7 +345,7 @@ header {
 .table-user-information td {
   padding-bottom: 20px;
   font-size: 1.1em;
-  border-top: none !important; 
+  border-top: none !important;
 }
 
 .panel-lower {
@@ -325,8 +356,8 @@ header {
   width: 80%;
   height: 100%;
   padding: 15px 15px 0px 15px;
-  color: white; 
-  background-color: #333333; 
+  color: white;
+  background-color: #333333;
   border: 3px solid #700000 ;
 }
 .friend-col-outer {

@@ -1,8 +1,8 @@
 <div class="container map-page">
   <div class="blooodmap col-md-8">
     <div id="googleMap" style="position: relative;"></div>
-      <div id='floating-panel'><nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
-      </div>
+    <div id='floating-panel'><nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
+    </div>
   </div>
   <div class="feed col-md-4" ng-controller="FeedController as FeedCtrl">
     <div class="feed-new">
@@ -20,8 +20,16 @@
       </div>
     </div>
   </div>
-  <div class="events col-md-5" ng-controller="MapEventController">
-
+  <div class="col-md-6">
+    <div class="events"ng-controller="MapEventController as MapEventCtrl">
+      <h3 ng-show="MapEventCtrl.events.length === 0">No events in this area</h3>
+      <div class="event" ng-repeat="event in MapEventCtrl.events">
+        <h3>{{event.hospital.name}}</h3>
+        <h4>{{event.time | date:('medium')}}</h4>
+        <h5>{{event.donors.length}} Participating:</h5>
+        <img ng-repeat="donor in event.donors" ng-src="{{donor.photo}}" alt="Donor photo">
+      </div>
+    </div>
   </div>
 </div>
 

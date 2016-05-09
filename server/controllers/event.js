@@ -46,7 +46,7 @@ let getEventsByLocation = (req, res) => {
       longitude: {
         $gt: minLong,
         $lt: maxLong
-      }}}]
+      }}}, Donor]
   })
   .then(events => res.send(events));
 };
