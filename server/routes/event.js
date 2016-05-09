@@ -7,7 +7,7 @@ let Hospital = controllers.Hospital;
 let Event = controllers.Event;
 let Sequelize = require('sequelize');
 
-const FIFTYSIXDAYS = 5E9;
+const FIFTYSIXDAYS = 5E9; // basically
 
 eventRouter.route('/')
 .post((req, res) => {
