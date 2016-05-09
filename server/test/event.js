@@ -45,7 +45,7 @@ describe('Events', function() {
         expect(response._getData().id).to.be.above(0);
         done();
       });
-
+      console.log('sending request');
       eventControllers.postEvent(request, response);
     });
 
