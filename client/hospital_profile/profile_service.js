@@ -13,7 +13,6 @@ app.factory('HospitalProfile', function($http) {
 
 
   let update = (hospital) => {
-    console.log(hospital);
     return $http({
       method: 'PUT',
       url: '/api/hospital/profile',
