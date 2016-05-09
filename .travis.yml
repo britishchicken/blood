@@ -22,7 +22,7 @@ services:
   - mysql
 before_install:
   - touch serverconfig.js
-  - mysql -u root -e 'blood;'
+  - mysql -u root -e 'create database blood;'
 
 
 
