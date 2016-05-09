@@ -3,7 +3,6 @@ let profileControllers = require('../controllers/profile.js');
 let db = require('../controllers/controller.js');
 let Donor = db.Donor;
 
-let sinon = require('sinon');
 let chai = require('chai');
 let expect = chai.expect;
 let http_mocks = require('node-mocks-http');
