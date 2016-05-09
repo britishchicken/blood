@@ -63,7 +63,15 @@
               </p>
               <p>
                 Enter your hospital openhours
-                <input type="text"  ng-model="HospitalProfileCtrl.editObj.openhours" required/>
+                <p ng-repeat="schedule in HospitalProfileCtrl.schedule">
+                  <span>{{schedule.day}} :</span>
+                  <!-- <input type="checkbox" id="day" ng-model="schedule.day" value={{schedule.day}} ng-change="HospitalProfileCtrl.updateSchedule(schedule.day)"/> -->
+                  Open from:
+                  <input type="number" ng-model="schedule.openhours"/>
+                  To:
+                  <input type="number" ng-model="schedule.closehours"/>
+                  <br />
+                </p>
               </p>
               <p>
                 Enter your hospital website
