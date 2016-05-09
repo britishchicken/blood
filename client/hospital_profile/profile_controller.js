@@ -21,10 +21,59 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
   {display: 'O-', code: 'oneg'}
   ];
 
+  HospitalProfileCtrl.schedule = [
+    {
+      
+      day: 1,
+      openhours: 9,
+      closehours: 17,
+    },
+    { 
+      
+      day: 2,
+      openhours: 9,
+      closehours: 17,
+    },
+    {
+      
+      day: 3,
+      openhours: 9,
+      closehours: 17,
+    },
+    {
+      
+      day: 4,
+      openhours: 9,
+      closehours: 17,
+    },
+    {
+      
+      day: 5,
+      openhours: 9,
+      closehours: 17,
+    },
+    {
+      
+      day: 6,
+      openhours: 9,
+      closehours: 17,
+    },
+    {
+      
+      day: 7,
+      openhours: 9,
+      closehours: 17,
+    }
+
+
+  ];
+ 
+
+
+
   HospitalProfileCtrl.getlatlong = () => {
     let address = document.getElementById('address').value;
     console.log(address);
-    // address = address || 'Ferrol, Galicia, Spain';
     // Initialize the Geocoder
     let geocoder = new google.maps.Geocoder();
     if (geocoder) {
@@ -44,6 +93,8 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
 
 
   HospitalProfileCtrl.update = () => {
+    HospitalProfileCtrl.editObj.schedules = HospitalProfileCtrl.schedule;
+    console.log(HospitalProfileCtrl.editObj);
     HospitalProfile.update(HospitalProfileCtrl.editObj)
     .then(hospital => {HospitalProfileCtrl.editObj = hospital; displayHospital();});
   };
