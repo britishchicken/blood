@@ -12,11 +12,35 @@ let getCurrentHospital = (req, res) => {
 };
 
 let updateCurrentHospital = (req, res) => {
-  Hospital.findOne({where: {id: req.user.id}})
-  .then(hospital => {
-    hospital.update(req.body)
+  Hospital.findOne({where: {id: req.user.id}, include: [Schedule]}) 
+  .then((hospital) => { 
+    hospital.update(req.body) 
+    .then(hospital => {
+      req.body.schedules.forEach((schedule) => {
+      Schedule.findOne({where: {hospitalId: req.user.id}})
+        .then(sch => {
+          if(sch) {
+            Schedule.update({
+              hospitalId: req.user.id,
+              day: schedule.day,
+              openhours: schedule.openhours,
+              closehours: schedule.closehours
+            } ,{where: {day: schedule.day}});
+
+          } else {
+              Schedule.create({
+                hospitalId: req.user.id,
+                day: schedule.day,
+                openhours: schedule.openhours,
+                closehours: schedule.closehours
+              });
+            }
+        });
+
+      });
+    })
     .then(() => res.send(hospital));
-  });
+    });
 };
 
 let getHospitalById = (req, res) => {
