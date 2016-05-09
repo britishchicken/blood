@@ -131,6 +131,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     .then(function (list) {
       BloodMapCtrl.hospitals = [];
       BloodMapCtrl.hospitals = list;
+      console.log('Sample hospital',BloodMapCtrl.hospitals[0]);
       // setZoom(BloodMapCtrl.map, BloodMapCtrl.hospitals);
 
       //Each time new hospitals are loaded in, reset all blood
