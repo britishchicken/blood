@@ -22,9 +22,9 @@ services:
   - mysql
 before_install:
   - touch serverconfig.js
-  - node ./server/controllers/controller.js
   - mysql -u root -e 'create database blood;'
-
+before_script:
+  - node ./server/controllers/controller.js
 
 
 
