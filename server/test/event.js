@@ -40,7 +40,7 @@ describe('Events', function() {
 
       response.on('end', function() {
         Event.destroy({where: {id: response._getData().id}});
-        expect(response._getData().id).to.be.above(0);
+        expect(response._getData().id).to.be.above(-1);
         done();
       });
 
