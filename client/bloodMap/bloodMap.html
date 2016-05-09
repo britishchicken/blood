@@ -24,10 +24,10 @@
     <div class="events"ng-controller="MapEventController as MapEventCtrl">
       <h3 ng-show="MapEventCtrl.events.length === 0">No events in this area</h3>
       <div class="event" ng-repeat="event in MapEventCtrl.events">
-        <h3>{{event.hospital.name}}</h3>
-        <h4>{{event.time | date:('medium')}}</h4>
+        <a ng-href="#event/{{event.id}}"><h3>{{event.hospital.name}}</h3>
+        <a ng-href="#event/{{event.id}}"></a><h4>{{event.time | date:('medium')}}</h4>
         <h5>{{event.donors.length}} Participating:</h5>
-        <img ng-repeat="donor in event.donors" ng-src="{{donor.photo}}" alt="Donor photo">
+        <a ng-repeat="donor in event.donors" ng-href="#profile/{{donor.id}}"><img  ng-src="{{donor.photo}}" alt="Donor photo"></a>
       </div>
     </div>
   </div>
