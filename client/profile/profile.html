@@ -1,46 +1,148 @@
-<div id='container'>
-  <h1> User Profile</h1>
+<div id="container">
 
+  <div style="text-align: center;">This page is private. It is not visible to others.</div>
+    <div class="col-lg-10 col-lg-offset-1 toppad" >
 
-  <div ng-hide="ProfileCtrl.edit">
-    <div  style="height:100px;width:200px;">
-      <img ng-src="{{ProfileCtrl.user.photo}}" height="100" width="100">
+    <div class="col-md-8">
+      <div class="panel-body">
+        <div class="col-md-3"> <img src="http://imgur.com/X78zGSg.jpg" class="img-circle center-block img-profile"/> </div>
+
+        <div class="col-md-3 userInfo-table"> 
+
+          <table ng-hide="ProfileCtrl.edit" class="table table-user-information">
+            <tbody>
+              <tr>
+                <td>
+                  <span style="color: #6e99e1;">Username:</span> {{ProfileCtrl.user.username}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span style="color: #6e99e1;">Email:</span> {{ProfileCtrl.user.email}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span style="color: #6e99e1;">Blood Type:</span> {{ProfileCtrl.user.bloodtype}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span style="color: #6e99e1;">Address:</span> {{ProfileCtrl.user.address}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+           <button ng-hide="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">Edit Info</button>
+           <div ng-show="ProfileCtrl.edit">
+            <form ng-submit="ProfileCtrl.updateUser()"  class="simple-form profile-edit-form">
+              Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
+              E-mail: <input type="email" ng-model="ProfileCtrl.user.email" /><br />
+              Location: <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/><br />
+              Blood Type: <input type="text" ng-model="ProfileCtrl.user.bloodtype" /><br />
+              <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
+            </form>
+            <button ng-show="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">Cancel Edit</button>
+          </div>
+        </div> 
+      </div>
     </div>
-    <ul>
-    <li>User: {{ProfileCtrl.user.username}} </li>
-    <li>Email: {{ProfileCtrl.user.email}} </li>
-    <li>Location : {{ProfileCtrl.user.address}} </li>
-    <li>Lat : {{ProfileCtrl.user.latitude}} </li>
-    <li>Long : {{ProfileCtrl.user.longitude}} </li>
-
-    <li>Bloodtype: {{ProfileCtrl.user.bloodtype}} </li>
-    </ul>
-
-  </div>
-   <div>
-    <button ng-click="ProfileCtrl.Edit()">Edit user</button>
-  </div>
-
-<!-- <div>
-  <h3>Edit Profile: <input type="checkbox"  ng-model="checked"></h3>
-</div> -->
-
-  <div>
-    <div ng-show="ProfileCtrl.edit">
-    <div style="height:100px;width:200px;">
-      <img ng-model=ProfileCtrl.user.photo height="100" width="100">
+    <div class="panel-body panel-lower">
+      <table class="table profile-table table-condensed">
+        <tbody>
+          <tr>
+            <td>
+              <img src="assests/heart.png" />
+              You donated blood at <a href="https://www.youtube.com/watch?v=D-UmfqFjpl0">Sacred Heart Hospital</a>. Good job, you did it!
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assests/buddy.png" />
+              You and your BLOOD BUDDY went and donated blood together! What a true friend you are.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assests/kraken.png" />
+              Your potent virgin blood helped to summon C'thulhu, may his madness envelope the world. Thanks for your help!
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assests/pizza.png" />
+              A piece of pizza was afraid of needles and didn't want to donate, but you convinced them by sharing your experiences! Wow-wee, all that rich pizza blood will come in handy.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assests/ghost.png">
+              You donated blood to a man who was later found guilty of murder, and since you're a part of that man now, the spiteful spirit of his victim now haunts you. Bummer! Better luck next time!
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-      <form ng-submit="ProfileCtrl.updateUser()" novalidate class="simple-form">
-        Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
-        E-mail: <input type="email" ng-model="ProfileCtrl.user.email" /><br />
-        Location: <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/><br />
-        <p>Latitude:{{ProfileCtrl.user.lat}}</p>
-        <p>Longitude:{{ProfileCtrl.user.long}}</p>
-        Blood Type: <input type="text" ng-model="ProfileCtrl.user.bloodtype" /><br />
-        <input type="submit" id="submit" value="Submit" />
-      </form>
-    </div>
   </div>
+  <div class="col-md-4 friend-col-outer center-block">
+    <div class="col-md-3 pull-left friends-col"> 
+      <table class="table friends-table table-condensed">
+        <tbody>
+          <td>
+            Friends:
+          </td>
+          <tr>
+            <td>
+             <img src="assests/friend.png" /><a href=''>Mack</a>
+           </td>
+         </tr>
+         <tr>
+          <td>
+            <img src="assests/friend.png" /><a href=''>Steve</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="assests/friend.png" /><a href=''>Bill</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="assests/friend.png" /><a href=''>Mark</a>
+          </td>
+        </tr>
+      </table>
+    </tbody>
+    <table class="table hospitals-table table-condensed">
+      <tbody>
+        <td>
+          Favorite Hospitals:
+        </td>
+        <tr>
+          <td>
+            <a href=''>Sacred Heart</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href=''>Definitely Not a Front for Vampires</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href=''>Uncle Choppy's Discount Surgery Hut</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href=''>Steve's Hospital and Casino</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </table>
+</div>
 </div>
 
 

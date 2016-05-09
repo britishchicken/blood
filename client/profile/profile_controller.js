@@ -15,10 +15,10 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
   };
 
   ProfileCtrl.edit = false;
+
   ProfileCtrl.Edit = function() {
     ProfileCtrl.edit = !ProfileCtrl.edit;
   };
-
 
   ProfileCtrl.getlatlong = () => {
     let address = document.getElementById('address').value;

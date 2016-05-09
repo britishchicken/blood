@@ -264,3 +264,101 @@ header {
 .nvd3 .nv-discretebar .nv-groups rect{
   fill-opacity: 1;
 }
+
+/* ----------------------------- */
+
+/* Profile styles go here. */
+
+.panel-info {
+  border: 0px;
+}
+.panel-info > .panel-heading {
+    color: white;
+    background-color: #700000;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.panel-heading > h3 {
+  font-size: 1.4em;
+}
+
+.profile-table {
+  color: white;
+}
+
+.img-profile {
+  height: 200px;
+  width: 200px;
+  border: 2px solid #700000;
+}
+
+.panel-body {
+  background-color: #333333;
+  border: 3px solid #700000;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1em;
+}
+
+.userInfo-table {
+  width: 40%;
+  color: white;
+  margin-left: 19%;
+}
+
+.profile-table {
+  padding-top: 2%;
+}
+
+
+.table-user-information td {
+  padding-bottom: 20px;
+  font-size: 1.1em;
+  border-top: none !important; 
+}
+
+.panel-lower {
+  margin-top: 10px;
+  font-size: 1em;
+}
+.friends-col {
+  width: 80%;
+  height: 100%;
+  padding: 15px 15px 0px 15px;
+  color: white; 
+  background-color: #333333; 
+  border: 3px solid #700000 ;
+}
+.friend-col-outer {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.friends-table th, .friends-table td, .hospitals-table th, .hospitals-table td{
+  border-top: none !important;
+}
+
+.profile-button {
+  background: #700000;
+  color: white;
+}
+
+.profile-button:hover {
+  color: gray;
+}
+
+.profile-edit-form {
+  color: gray;
+}
+
+@media only screen and (max-width: 990px) {
+  .friend-col-outer {
+    margin: 0 auto;
+    float: none;
+    padding-top: 2%;
+  }
+  .userInfo-table {
+    margin: 0 auto;
+  }
+}
+
+/* ----------------------------- */
