@@ -1,7 +1,5 @@
 'use strict'
 let google = require('googleapis');
-// let googleAuth = require('google-auth-library');
-// let auth = new googleAuth();
 let calendar = google.calendar('v3');
 let getAuthClient = require('../routes/auth.js').getAuthClient;
 
@@ -9,20 +7,10 @@ module.exports = {
   showEvents: (req, res) => {
     let authClient = getAuthClient();
     if (!req.session['tokens']) {
+      console.log('no tokens present!');
       return res.send(401);
     }
-
-    // console.log('<<<', res);
-    // console.log('hiii\n\n\n');
-    // console.log('\n\n\nNOW\n\n\n');
-    // console.log(auth.client);
-    console.log('11111');
     authClient.setCredentials(req.session['tokens']);
-    // if (!auth.client) {
-    //   console.log('no auth!');
-    //   return res.send(401);
-    // }
-
     let now = new Date();
 
     calendar.events.list({
@@ -33,21 +21,16 @@ module.exports = {
       singleEvents: true,
       orderBy: 'startTime'
     }, (err, response) => {
-      console.log('22222');
-
       if (err) {
-        console.error('The API returned an error: ' + err);
+        console.log('The API returned an error: ' + err);
         return res.send(404);
       }
-      console.log('33333');
-
-      let events = response.items;
-      console.log(events);
-      if (events.length == 0) {
+      if (response.items.length == 0) {
         res.send('No upcoming events found.');
       } else {
-        console.log('44444');
-        events = events.filter(event => {
+        // this will need to be fixed
+        // i currently dunno the behavior of the start and end properties
+        let events = response.items.filter(event => {
           return event.start.dateTime && event.end.dateTime;
         });
 

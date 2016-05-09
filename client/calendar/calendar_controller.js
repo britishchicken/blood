@@ -10,19 +10,6 @@
       timezone: 'local',
       displayEventEnd: true,
       eventSources: ['/api/calendar'],
-      // events: [
-      //   {
-      //     title: 'hi',
-      //     start: new Date(),
-      //     end: new Date() 
-      //   },
-      //   {
-      //     title: 'bye',
-      //     start: new Date()
-      //   }
-      // ],
-      // eventOverlap: false,
-      // overlap: false,
       eventClick: (calEvent, jsEvent, view) => {
         if (calEvent.title === 'Schedule an appointment!') {
           CalendarCtrl.createEvent(calEvent.start, calEvent.end);
