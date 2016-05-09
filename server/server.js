@@ -32,7 +32,7 @@ app.use(session({secret: 'lolwut', key: 'sid'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth/oauthcallback', express.static(__dirname + '/../oauthcallback.html'));
+app.use('/oauthcallback', express.static(__dirname + '/../oauthcallback.html'));
 
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);

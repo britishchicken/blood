@@ -27,34 +27,42 @@ passport.deserializeUser(function(obj, done) {
 const GOOGLE_ID = config.calendarid;
 const GOOGLE_SECRET = config.calendarsecret;
 const GOOGLE_REDIRECT = config.calendarurl;
-const SCOPE = [
-  'https://www.googleapis.com/auth/userinfo.email',
-  'https://www.googleapis.com/auth/userinfo.profile',
-  'https://www.googleapis.com/auth/calendar'
-];
+
+let getAuthClient = () => {
+  return new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
+};
+
+let getAuthUrl = () => {
+  let oauth2Client = getAuthClient();
+  const scopes = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'https://www.googleapis.com/auth/calendar'
+  ];
+  var url = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: scopes // If you only need one scope you can pass it as string
+  });
+ 
+  return url;
+};
 
 let google = require('googleapis');
 let OAuth2 = google.auth.OAuth2;
-let oauth2Client = new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
-
-const URL = oauth2Client.generateAuthUrl({
-  access_type: 'offline',
-  scope: SCOPE
-});
-
-
+// let oauth2Client = new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
 // end of google auth requirements
 
 // start of google auth routes
 authRouter.route('/url')
   .get((req, res) => {
-    res.send(URL)
+    res.send(getAuthUrl())
   });
 
 authRouter.route('/googleToken')
   .get((req, res) => {
     let code = req.query.code;
     let session = req.session;
+    let oauth2Client = getAuthClient()
     oauth2Client.getToken(code, (err, tokens) => {
       if (err) {
         return console.error('an error has occured in setting the token: ' + err);
@@ -191,5 +199,4 @@ authRouter.route('/logout')
 
 module.exports.passport = passport;
 module.exports.authRouter = authRouter;
-module.exports.url = URL;
-module.exports.client = oauth2Client;
+module.exports.getAuthClient = getAuthClient;
