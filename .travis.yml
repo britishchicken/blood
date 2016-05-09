@@ -5,6 +5,8 @@ before_script:
   - bower install
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - node ./server/controllers/controller.js
+
 addons:
   firefox: latest
   apt:
@@ -23,10 +25,3 @@ services:
 before_install:
   - touch serverconfig.js
   - mysql -u root -e 'create database blood;'
-before_script:
-  - node ./server/controllers/controller.js
-
-
-
-
-
