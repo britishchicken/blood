@@ -10,6 +10,7 @@ let Sequelize = require('sequelize');
 const FIFTYSIXDAYS = 5E9; // basically
 
 let postEvent = (req, res) => {
+  console.log('in controller');
   Promise.all([
     Event.create({time: req.body.time}),
     Donor.findOne({where: {id: req.user.id}})
@@ -19,7 +20,8 @@ let postEvent = (req, res) => {
       let donor = results[1];
       event.addDonor(donor)
       .then(() => res.send(event));
-    });
+    })
+    .catch(err => console.log(err));
   };
 
 let getEventsByLocation = (req, res) => {
