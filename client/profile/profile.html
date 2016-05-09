@@ -18,6 +18,11 @@
               </tr>
               <tr>
                 <td>
+                  <span style="color: #6e99e1;">Display Name:</span> {{ProfileCtrl.user.name}}
+                </td>
+              </tr>
+              <tr>
+                <td>
                   <span style="color: #6e99e1;">Email:</span> {{ProfileCtrl.user.email}}
                 </td>
               </tr>
@@ -37,8 +42,8 @@
            <button ng-hide="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">Edit Info</button>
            <div ng-show="ProfileCtrl.edit">
             <form ng-submit="ProfileCtrl.updateUser()"  class="simple-form profile-edit-form">
-              Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
-              E-mail: <input type="email" ng-model="ProfileCtrl.user.email" /><br />
+              Display Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
+              E-mail: <br /><input type="email" ng-model="ProfileCtrl.user.email" /><br />
               Location: <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/><br />
               Blood Type: <input type="text" ng-model="ProfileCtrl.user.bloodtype" /><br />
               <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
