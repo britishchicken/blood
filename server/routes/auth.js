@@ -27,6 +27,11 @@ passport.deserializeUser(function(obj, done) {
 const GOOGLE_ID = config.calendarid;
 const GOOGLE_SECRET = config.calendarsecret;
 const GOOGLE_REDIRECT = config.calendarurl;
+const SCOPE = [
+  'https://www.googleapis.com/auth/userinfo.email',
+  'https://www.googleapis.com/auth/userinfo.profile',
+  'https://www.googleapis.com/auth/calendar'
+];
 
 let google = require('googleapis');
 let OAuth2 = google.auth.OAuth2;
@@ -34,8 +39,10 @@ let oauth2Client = new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
 
 const URL = oauth2Client.generateAuthUrl({
   access_type: 'offline',
-  scope: 'https://www.googleapis.com/auth/calendar'
+  scope: SCOPE
 });
+
+
 // end of google auth requirements
 
 // start of google auth routes
@@ -47,12 +54,14 @@ authRouter.route('/url')
 authRouter.route('/googleToken')
   .get((req, res) => {
     let code = req.query.code;
+    let session = req.session;
     oauth2Client.getToken(code, (err, tokens) => {
       if (err) {
         return console.error('an error has occured in setting the token: ' + err);
       }
       oauth2Client.setCredentials(tokens);
-      google.options({ auth: oauth2Client }); // set auth as a global default
+      session['tokens']=tokens;
+      // google.options({ auth: oauth2Client }); // set auth as a global default
       res.send('authenticated!');
     });
 });
@@ -182,3 +191,5 @@ authRouter.route('/logout')
 
 module.exports.passport = passport;
 module.exports.authRouter = authRouter;
+module.exports.url = URL;
+module.exports.client = oauth2Client;

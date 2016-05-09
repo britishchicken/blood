@@ -1,20 +1,31 @@
 'use strict'
 let google = require('googleapis');
 let googleAuth = require('google-auth-library');
-let auth = new googleAuth();
+// let auth = new googleAuth();
 let calendar = google.calendar('v3');
+let auth = require('../routes/auth.js');
 
 module.exports = {
   showEvents: (req, res) => {
-    if (!google._options.auth) {
-      console.log('no auth!');
-      return res.send(404);
+    if (!req.session['tokens']) {
+      return res.send(401);
     }
+
+    // console.log('<<<', res);
+    // console.log('hiii\n\n\n');
+    // console.log('\n\n\nNOW\n\n\n');
+    // console.log(auth.client);
+    console.log('hiiii', req.session['tokens']);
+    auth.client.setCredentials(req.session['tokens']);
+    // if (!auth.client) {
+    //   console.log('no auth!');
+    //   return res.send(401);
+    // }
 
     let now = new Date();
 
     calendar.events.list({
-      auth: google._options.auth,
+      auth: auth.client,
       calendarId: 'primary',
       timeMin: now.toISOString(),
       timeMax: new Date(now.setYear(2017)).toISOString(),
@@ -48,7 +59,7 @@ module.exports = {
 
   addEvent: (req, res) => {
     calendar.events.insert({
-      auth: google._options.auth,
+      auth: auth.client,
       calendarId: 'primary',
       resource: req.body
     }, (err, event) => {
