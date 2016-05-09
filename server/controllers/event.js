@@ -14,6 +14,7 @@ let postEvent = (req, res) => {
     Event.create({time: req.body.time}),
     Donor.findOne({where: {id: req.user.id}})
     ]).then(results => {
+      console.log('made event and donor');
       let event = results[0];
       let donor = results[1];
       event.addDonor(donor)
