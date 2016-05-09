@@ -31,7 +31,6 @@ describe('Events', function() {
         method: 'POST',
         url: '/',
         body: {
-          content: 'test',
           time: new Date().toUTCString()
         }
       });
@@ -40,7 +39,8 @@ describe('Events', function() {
 
       response.on('end', function() {
         Event.destroy({where: {id: response._getData().id}});
-        expect(response._getData().id).to.be.above(-1);
+        console.log('response: ', response._getData().id);
+        expect(response._getData().id).to.be.above(0);
         done();
       });
 
