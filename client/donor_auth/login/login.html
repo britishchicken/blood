@@ -1,15 +1,21 @@
 <div id="donor-login">
+  <div class="panel-body login-panel">
   <h3>Login for donors</h3>
+  <br />
   <form ng-submit="DonorAuthCtrl.login()">
     <p>
-      Enter your username: 
-      <input type="text" ng-model="DonorAuthCtrl.loginObj.username" required/>
+      Enter your username:
     </p>
+    <br />
+      <input class="center-block form-control login-input" type="text" ng-model="DonorAuthCtrl.loginObj.username" required/>
+    <br />
     <p>
-      Enter your password: 
-      <input type="text" ng-model="DonorAuthCtrl.loginObj.password" required/>
+      Enter your password:
     </p>
-    <button>Login</button>
+    <br />
+      <input class="center-block form-control login-input" type="text" ng-model="DonorAuthCtrl.loginObj.password" required/>
+      <br />
+    <button class="center-block btn profile-button">Login</button>
   </form>
   <p>
     <a href="/auth/facebook">Log in with facebook</a>
@@ -18,4 +24,5 @@
     Don't have an account?
     <a href="#donor/signup">Sign up!</a>
   </p>
+  </div>
 </div>
