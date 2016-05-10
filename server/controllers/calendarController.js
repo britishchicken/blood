@@ -5,6 +5,7 @@ let getAuthClient = require('../routes/auth.js').getAuthClient;
 
 module.exports = {
   showEvents: (req, res) => {
+    console.log('inside shoeEvents');
     let authClient = getAuthClient();
     if (!req.session['tokens']) {
       console.log('no tokens present!');
@@ -13,7 +14,7 @@ module.exports = {
     authClient.setCredentials(req.session['tokens']);
     let now = new Date();
     let later = new Date();
-    later.setMonth(later.getMonth() + 3);
+    later.setMonth(later.getMonth() + 1);
 
     calendar.events.list({
       auth: authClient,
@@ -28,7 +29,7 @@ module.exports = {
         return res.send(500);
       }
       if (response.items.length == 0) {
-        console.log('No upcoming events found in the 3 months.');
+        console.log('No upcoming events found in the 1 month.');
         res.send(200);
       } else {
         // this will need to be fixed

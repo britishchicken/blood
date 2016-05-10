@@ -6,26 +6,28 @@
     <button ng-click="CalendarCtrl.googleSignin()">Sign in with google</button>
   </p>
 
-  <form ng-submit="CalendarCtrl.createEvent()">
+<!--   <form ng-submit="CalendarCtrl.createEvent()">
     <p>
       Choose a date:
       <input type="datetime-local" ng-model="CalendarCtrl.dateTime"/>
       <button>Schedule it!</button>
     </p>
   </form>
- 
+
+  </form> -->
   <p>
-    If you deleted an event from your calendar, click
-    <button ng-click="CalendarCtrl.reload()">refresh</button>
+    <!-- If you deleted an event from your calendar, click -->
+    <!-- <button ng-click="CalendarCtrl.reload()">refresh</button> -->
   </p>
 
   <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button>
 
-  <div class="fb-share-button" 
-    data-href="http://52.39.22.12:8080/#/" 
+  <div class="fb-share-button"
+    data-href="http://52.39.22.12:8080/#/"
     data-layout="button_count">
  </div>
 
+  <!-- <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button> -->
   <div id="calendar"></div>
 
   <!-- Modal -->
