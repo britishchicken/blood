@@ -1,9 +1,10 @@
 'use strict'
 let db = require('../controllers/controller.js');
 let Donor = db.Donor;
+let Event = db.Event;
 
 let getCurrentDonor = (req, res) => {
-  Donor.findOne({where: {id: req.user.id}})
+  Donor.findOne({where: {id: req.user.id}, include: [Event]})
   .then(user => {
     res.send(user);
   });
