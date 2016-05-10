@@ -53,6 +53,11 @@ module.exports = {
 
   addEvent: (req, res) => {
     let authClient = getAuthClient();
+    if (!req.session.tokens) {
+      console.log('no tokens present!');
+      return res.send(401);
+    }
+
     authClient.setCredentials(req.session['tokens']);
     calendar.events.insert({
       auth: authClient,

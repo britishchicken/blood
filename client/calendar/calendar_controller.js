@@ -1,10 +1,29 @@
 (() => {
-  app.controller('CalendarController', ['$http', '$window', '$routeParams', function($http, $window, $routeParams) {
+  app.controller('CalendarController', ['$http', '$window', '$routeParams', '$scope', function($http, $window, $routeParams, $scope) {
     let CalendarCtrl = this;
     let $calendar = $('#calendar');
 
     CalendarCtrl.possibleEvents = [];
     CalendarCtrl.googleEvents = [];
+    CalendarCtrl.time = {};
+
+    CalendarCtrl.setTime = (calEvent) => {
+      // console.log('1.', CalendarCtrl.eventTime);
+      let month = calEvent.start.month();
+      let day = calEvent.start.day();
+      let hour = calEvent.start.hour();
+      let minute = calEvent.start.minutes();
+      minute = minute < 10 ? minute + '0' : minute;
+
+      CalendarCtrl.time.start = calEvent.start;
+      CalendarCtrl.time.end = calEvent.end;
+
+      CalendarCtrl.time.print = `${month}/${day} @ ${hour}:${minute}`;
+      // console.log('2.', CalendarCtrl.eventTime);
+
+    };
+
+    console.log(CalendarCtrl.uiConfig);
 
     $calendar.fullCalendar({
       timezone: 'local',
@@ -12,10 +31,19 @@
       eventSources: ['/api/calendar'],
       eventClick: (calEvent, jsEvent, view) => {
         if (calEvent.title === 'Schedule an appointment!') {
-          CalendarCtrl.createEvent(calEvent.start, calEvent.end);
+          let modal = $('.modal');
+          // console.log(calEvent.start);
+          modal.find(".modal-title").html(event.title);
+          CalendarCtrl.setTime(calEvent);
+          $scope.$apply();
+          modal.modal();
         }
       }
     });
+
+    CalendarCtrl.makeEvent = () => {
+      CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
+    };
 
     CalendarCtrl.googleLogin = () => {
       $http.get('/auth/url').then(res => {
@@ -34,6 +62,7 @@
             $calendar.fullCalendar('removeEventSource', CalendarCtrl.possibleEvents);
             $calendar.fullCalendar('refetchEvents');
             CalendarCtrl.googleEvents = $calendar.fullCalendar('clientEvents');
+            CalendarCtrl.automateDates();
           });
         };
       });
@@ -64,11 +93,12 @@
           }
         }
       })
-      .then((res) => {
+      .then(res => {
         if (res.status === 201) {
           $calendar.fullCalendar('refetchEvents');
           $calendar.fullCalendar('removeEventSource', CalendarCtrl.possibleEvents);
           CalendarCtrl.possibleEvents = [];
+          CalendarCtrl.automateDates();
         }
       });
     };
@@ -108,9 +138,8 @@
                   ((currentHour >= googleEvent._start.hour() + googleEvent._start.minutes() / 60) || (currentHour+0.75 >= googleEvent._start.hour() + googleEvent._start.minutes() / 60)) &&
                   ((currentHour <= endHour + endMinutes / 60) || (currentHour+0.75 <= endHour + endMinutes / 60))) {
                   isOverlap = true;
-console.log('im in!');
                   break;
-                } 
+                }
               }
 
               if (!isOverlap) {
@@ -134,5 +163,6 @@ console.log('im in!');
       });
     }
 
+    CalendarCtrl.automateDates();
   }]);
 })();
