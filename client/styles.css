@@ -478,4 +478,21 @@ hr {
   }
 }
 
-/* -----------------------------
+/* ----------------------------- */
+
+/* Login page styling */
+
+.login-panel {
+  width: 90%;
+  max-width: 450px;
+  margin: 50px auto;
+  color: white;
+}
+
+.login-panel > h3, .login-panel > form > p, .login-panel > p {
+  text-align: center;
+}
+
+.login-input {
+  width: 60%;
+}
