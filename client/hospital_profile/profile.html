@@ -1,79 +1,124 @@
-<!-- <div id="hospital-edit-container">
-
-  <div ng-hide="HospitalProfileCtrl.edit">
-     <div  style="height:100px;width:200px;">
-      <img ng-src="{{HospitalProfileCtrl.editObj.photo}}" || "http://www.bloodcenters.org/" height="100" width="100">
-
-    </div>
-    <ul>
-      <li>Hospital: {{HospitalProfileCtrl.editObj.username}} </li>
-      <li>Email: {{HospitalProfileCtrl.editObj.email}} </li>
-      <li>Contact number: {{HospitalProfileCtrl.editObj.phonenum}} </li>
-      <li>Open hours: {{HospitalProfileCtrl.editObj.openhours}} </li>
-      <li>Website: {{HospitalProfileCtrl.editObj.hospitalurl}} </li>
-      <li>Location: {{HospitalProfileCtrl.editObj.address}} </li>
-      <li>Lat: {{HospitalProfileCtrl.editObj.latitude}} </li>
-      <li>Long: {{HospitalProfileCtrl.editObj.longitude}} </li>
-    </ul>
-
-  </div>
-  <div>
-    <button ng-click="HospitalProfileCtrl.Edit()">Edit Hospital</button>
-  </div>
-
-  <div ng-show="HospitalProfileCtrl.edit">
-    <h3>Initial Hospital Setup</h3>
-    <div style="height:100px;width:200px;">
-      <img ng-model=HospitalProfileCtrl.editObj.photo height="100" width="100">
-    </div>
-    <form ng-submit="HospitalProfileCtrl.update()">
-      <p>
-        Enter your hospital name
-        <input type="text" ng-model="HospitalProfileCtrl.editObj.name" required/>
-      </p>
-      <p>
-        Enter your hospital email
-        <input type="text" ng-model="HospitalProfileCtrl.editObj.email" required/>
-      </p>
-      <p>
-        Enter your hospital location
-        <input type="text" id="address" ng-model="HospitalProfileCtrl.editObj.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" required/>
-      </p>
-      <p>
-        Enter your hospital phonenum
-        <input type="text"  ng-model="HospitalProfileCtrl.editObj.phonenum" required/>
-      </p>
-      <p>
-        Enter your hospital openhours
-        <input type="text"  ng-model="HospitalProfileCtrl.editObj.openhours" required/>
-      </p>
-      <p>
-        Enter your hospital website
-        <input type="text"  ng-model="HospitalProfileCtrl.editObj.hospitalurl" required/>
-      </p>
-      <p ng-repeat="bloodType in HospitalProfileCtrl.bloodTypes">
-        Enter {{bloodType.display}} blood stock level
-        <input type="text" ng-model="HospitalProfileCtrl.editObj[bloodType.code]" required>
-      </p>
-      <button ng-click="HospitalProfileCtrl.Edit()">Submit</button>
-    </form>
-  </div>
-</div>
- -->
-
-
- <div id="container">
- <div style="text-align: center;">This page is private. It is not visible to others.</div>
+<div id="container">
+  <div style="text-align: center;"><p>This page is private. It is not visible to others.</p></div>
   <div class="col-lg-10 col-lg-offset-1" >
     <div class="col-md-8">
       <div class="panel-body">
-      <div class="col-md-3"> <img src="http://i1383.photobucket.com/albums/ah314/mydogwearssocks/Alchemilla%20Mod%20Walkthrough/Step%201%20enter%20hospital_zpsmh63xq4c.png" class="img-circle center-block img-profile"/> </div>
-        <div class="col-md-3" style="width: 80%;">text1</div>
-      </div>
-        <div class="col-md-3 panel-body panel-lower" style="width: 80%;">text2</div>
-    </div>
+        <div class="col-md-3"> <img src="{{HospitalProfileCtrl.editObj.photo}}" alt="No Image Provided" onError="this.src = 'assests/hosp.jpg';" class="img-circle center-block img-profile"/>
+          <div class="hospital-blood-panel">
+            <nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
+          </div>
+        </div>
+        <div class="col-md-3 userInfo-table">
+          <div ng-hide="HospitalProfileCtrl.edit" class="table table-user-information">
+            <div>
+              <span style="color: #6e99e1;">Username:</span>
+              <br />
+              <span>{{HospitalProfileCtrl.editObj.username}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Display Name:</span> <br/>
+              <span>{{HospitalProfileCtrl.editObj.name}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Email:</span> <br/>
+              <span>{{HospitalProfileCtrl.editObj.email}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Address:</span>
+              <span>{{HospitalProfileCtrl.editObj.address}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Website:</span><br/>
+              <span>{{HospitalProfileCtrl.editObj.hospitalurl}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Phone Number:</span><br/> <span>{{HospitalProfileCtrl.editObj.phonenum}}</span>
+            </div>
+          </div>
+          <div>
 
+            <button ng-hide="HospitalProfileCtrl.edit" ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn" style="color: white;">Edit Info</button>
+          </div>
+          <div ng-show="HospitalProfileCtrl.edit">
+            <p>Edit Information:</p>
+            <div style="height:100px;width:200px;">
+              <img ng-model=HospitalProfileCtrl.editObj.photo height="100" width="100">
+            </div>
+            <form ng-submit="HospitalProfileCtrl.update()" style="color: gray;">
+              <p>
+                Enter your hospital name
+                <input type="text" ng-model="HospitalProfileCtrl.editObj.name" required/>
+              </p>
+              <p>
+                Enter your hospital email
+                <input type="text" ng-model="HospitalProfileCtrl.editObj.email" required/>
+              </p>
+              <p>
+                Enter your hospital location
+                <input type="text" id="address" ng-model="HospitalProfileCtrl.editObj.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" required/>
+              </p>
+              <p>
+                Enter your hospital phonenum
+                <input type="text"  ng-model="HospitalProfileCtrl.editObj.phonenum" required/>
+              </p>
+              <p>
+                Enter your hospital openhours
+                <input type="text"  ng-model="HospitalProfileCtrl.editObj.openhours" required/>
+              </p>
+              <p>
+                Enter your hospital website
+                <input type="text"  ng-model="HospitalProfileCtrl.editObj.hospitalurl" required/>
+              </p>
+              <p ng-repeat="bloodType in HospitalProfileCtrl.bloodTypes">
+                Enter {{bloodType.display}} blood stock level
+                <input type="text" ng-model="HospitalProfileCtrl.editObj[bloodType.code]" required>
+              </p>
+              <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Submit</button>
+
+            </form>
+          </div>
+          <div>
+            <button ng-show="HospitalProfileCtrl.edit" ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Cancel Edit</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 panel-body panel-lower" style="width: 100%;">
+        <div class="table profile-table table-condensed">
+          <div>
+            <hr>
+            <img src="assests/heart.png" />
+            <span>You are hosting a blood drive at [SUBJECT HOMETOWN HERE] Park on October 31st, 2016. So far, [NUMBER] people have responded to say they will be attending.</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/buddy.png" />
+            <span>You and your BLOOD BUDDY went and donated blood together! What a true friend you are.</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/kraken.png" />
+            <span>Your potent virgin blood helped to summon C'thulhu, may his madness envelope the world. Thanks for your help!</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/pizza.png" />
+            <span>A piece of pizza was afraid of needles and didn't want to donate, but you convinced them by sharing your experiences! Wow-wee, all that rich pizza blood will come in handy.</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/ghost.png">
+            <span>You donated blood to a man who was later found guilty of murder, and since you're a part of that man now, the spiteful spirit of his victim now haunts you. Bummer! Better luck next time!</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-4 friend-col-outer center-block">
-      <div class="col-md-3 panel-body pull-left friends-col">text3</div>
+      <div class="col-md-3 panel-body pull-left friends-col">Here's what people have to say about you:
+        <div class="review" ng-repeat="review in HospitalProfileCtrl.reviews">
+          <h3>{{review.donor.name}}</h3>
+          <p>{{review.content}}</p>
+        </div>
+      </div>
     </div>
   </div>
+</div>
