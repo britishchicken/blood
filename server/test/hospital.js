@@ -46,7 +46,8 @@ describe('Hospitals', function() {
           method: 'PUT',
           url: '/',
           body: {
-            name: 'newhospital'
+            name: 'newhospital',
+            schedules:[{day: 1, openhours: 9, closehours: 17},{day: 2, openhours: 9, closehours: 17}]
           }
         });
 
