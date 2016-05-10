@@ -1,155 +1,127 @@
 <div id="container">
-
   <div style="text-align: center;">This page is private. It is not visible to others.</div>
-    <div class="col-lg-10 col-lg-offset-1" >
-
+  <div class="col-lg-10 col-lg-offset-1" >
     <div class="col-md-8">
       <div class="panel-body">
-        <div class="col-md-3"> <img src="http://imgur.com/X78zGSg.jpg" class="img-circle center-block img-profile"/> </div>
-
+        <div class="col-md-3"> 
+          <img ng-src="{{ProfileCtrl.user.photo}}" class="img-circle center-block img-profile"/> 
+        </div>
         <div class="col-md-3 userInfo-table"> 
-
-          <table ng-hide="ProfileCtrl.edit" class="table table-user-information">
-            <tbody>
-              <tr>
-                <td>
-                  <span style="color: #6e99e1;">Username:</span> {{ProfileCtrl.user.username}}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span style="color: #6e99e1;">Display Name:</span> {{ProfileCtrl.user.name}}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span style="color: #6e99e1;">Email:</span> {{ProfileCtrl.user.email}}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span style="color: #6e99e1;">Blood Type:</span> {{ProfileCtrl.user.bloodtype}}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span style="color: #6e99e1;">Address:</span> {{ProfileCtrl.user.address}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-           <button ng-hide="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">Edit Info</button>
-           <div ng-show="ProfileCtrl.edit">
-            <form ng-submit="ProfileCtrl.updateUser()"  class="simple-form profile-edit-form">
-              Display Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
-              E-mail: <br /><input type="email" ng-model="ProfileCtrl.user.email" /><br />
-              Location: <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/><br />
-              Blood Type: <input type="text" ng-model="ProfileCtrl.user.bloodtype" /><br />
-              <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
-            </form>
-            <button ng-show="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">Cancel Edit</button>
+          <div ng-hide="ProfileCtrl.edit" class="table table-user-information">
+            <div>
+              <span style="color: #6e99e1;">Username:</span> 
+              <span>{{ProfileCtrl.user.username}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Display Name:</span>
+              <span>{{ProfileCtrl.user.name}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Email:</span>
+              <span>{{ProfileCtrl.user.email}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Blood Type:</span>
+              <span>{{ProfileCtrl.user.bloodtype}}</span>
+            </div>
+            <div>
+              <span style="color: #6e99e1;">Address:</span>
+              <span>{{ProfileCtrl.user.address}}</span>
+            </div>
           </div>
-        </div> 
+          <div>
+            <button ng-hide="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">
+              <span>Edit Info</span>
+            </button>
+            <div ng-show="ProfileCtrl.edit">
+              <form ng-submit="ProfileCtrl.updateUser()"  class="simple-form profile-edit-form">
+                <span>Display Name:</span>
+                <input type="text" ng-model="ProfileCtrl.user.name" />
+                <br />
+                <span>E-mail:</span>
+                <br />
+                <input type="email" ng-model="ProfileCtrl.user.email" /><br />
+                <span>Location:</span> 
+                <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/>
+                <br />
+                <span>Blood Type:</span> 
+                <input type="text" ng-model="ProfileCtrl.user.bloodtype" />
+                <br />
+                <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
+              </form>
+              <button ng-show="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">
+                <span>Cancel Edit</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body panel-lower">
+        <div class="table profile-table table-condensed">
+          <div>
+            <hr>
+            <img src="assests/heart.png" />
+            <span>You donated blood at <a href="https://www.youtube.com/watch?v=D-UmfqFjpl0">Sacred Heart Hospital</a>. Good job, you did it!</span>
+          </div>
+          <div>
+            <hr>
+            <img src="assests/buddy.png" />
+            <span>You and your BLOOD BUDDY went and donated blood together! What a true friend you are.</span>
+          </div>
+          <div>
+            <hr>
+            <img src="assests/kraken.png" />
+            <span>Your potent virgin blood helped to summon C'thulhu, may his madness envelope the world. Thanks for your help!</span>
+          </div>
+          <div>
+            <hr>
+            <img src="assests/pizza.png" />
+            <span>A piece of pizza was afraid of needles and didn't want to donate, but you convinced them by sharing your experiences! Wow-wee, all that rich pizza blood will come in handy.</span>
+          </div>
+          <div>
+            <hr>
+            <img src="assests/ghost.png">
+            <span>You donated blood to a man who was later found guilty of murder, and since you're a part of that man now, the spiteful spirit of his victim now haunts you. Bummer! Better luck next time!</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="panel-body panel-lower">
-      <table class="table profile-table table-condensed">
-        <tbody>
-          <tr>
-            <td>
-              <img src="assests/heart.png" />
-              You donated blood at <a href="https://www.youtube.com/watch?v=D-UmfqFjpl0">Sacred Heart Hospital</a>. Good job, you did it!
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="assests/buddy.png" />
-              You and your BLOOD BUDDY went and donated blood together! What a true friend you are.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="assests/kraken.png" />
-              Your potent virgin blood helped to summon C'thulhu, may his madness envelope the world. Thanks for your help!
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="assests/pizza.png" />
-              A piece of pizza was afraid of needles and didn't want to donate, but you convinced them by sharing your experiences! Wow-wee, all that rich pizza blood will come in handy.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="assests/ghost.png">
-              You donated blood to a man who was later found guilty of murder, and since you're a part of that man now, the spiteful spirit of his victim now haunts you. Bummer! Better luck next time!
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-md-4 friend-col-outer center-block">
+      <div class="col-md-3 pull-left friends-col"> 
+        <div class="table friends-table table-condensed">
+          <div>
+            <span>Friends:</span>
+          </div>
+          <div>
+           <img src="assests/friend.png" /><a href=''>Mack</a>
+         </div>
+         <div>
+          <img src="assests/friend.png" /><a href=''>Steve</a>
+        </div>
+        <div>
+          <img src="assests/friend.png" /><a href=''>Bill</a>
+        </div>
+        <div>
+          <img src="assests/friend.png" /><a href=''>Mark</a>
+        </div>
+      </div>
+      <div class="table hospitals-table table-condensed">
+        <div>
+          <span>Favorite Hospitals:</span>
+        </div>
+        <div>
+          <a href=''>Sacred Heart</a>
+        </div>
+        <div>
+          <a href=''>Definitely Not a Front for Vampires</a>
+        </div>
+        <div>
+          <a href=''>Uncle Choppy's Discount Surgery Hut</a>
+        </div>
+        <div>
+          <a href=''>Steve's Hospital and Casino</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-md-4 friend-col-outer center-block">
-    <div class="col-md-3 pull-left friends-col"> 
-      <table class="table friends-table table-condensed">
-        <tbody>
-          <td>
-            Friends:
-          </td>
-          <tr>
-            <td>
-             <img src="assests/friend.png" /><a href=''>Mack</a>
-           </td>
-         </tr>
-         <tr>
-          <td>
-            <img src="assests/friend.png" /><a href=''>Steve</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src="assests/friend.png" /><a href=''>Bill</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src="assests/friend.png" /><a href=''>Mark</a>
-          </td>
-        </tr>
-      </table>
-    </tbody>
-    <table class="table hospitals-table table-condensed">
-      <tbody>
-        <td>
-          Favorite Hospitals:
-        </td>
-        <tr>
-          <td>
-            <a href=''>Sacred Heart</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href=''>Definitely Not a Front for Vampires</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href=''>Uncle Choppy's Discount Surgery Hut</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a href=''>Steve's Hospital and Casino</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </table>
 </div>
-</div>
-
-
-
-
