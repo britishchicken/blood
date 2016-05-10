@@ -229,7 +229,7 @@ header {
 }
 /*
 #iw_container .iw_content{
- color: white; 
+ color: white;
  }*/
 
  #iw_container .btn-default {
@@ -251,7 +251,7 @@ header {
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: right;
  }
- 
+
  #iw_container {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 11px;
@@ -303,8 +303,8 @@ header {
    border-radius: 15px;
    border: 2px solid #700000;
    width: 200px !important;
-   overflow: hidden; 
-  
+   overflow: hidden;
+
 }
 
 #street{
@@ -317,10 +317,9 @@ header {
 /* ----------------------------- */
 
 .hospital-blood-panel {
-  position: absolute;
-  left: -23%;
-  top: 100%;
-  width: 180%;
+  position: relative;
+  left: -40%;
+  width: 230%;
   z-index: 99;
   background-color: rgba(255,255,255,0.0);
   text-align: center;
@@ -340,7 +339,7 @@ header {
 }
 
 #floating-panel {
-  position: relative;
+  position: absolute;
   left: -3%;
   bottom: -15px;
   z-index: 99;
@@ -399,6 +398,7 @@ header {
   border: 3px solid #700000;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.1em;
+  height: 100%;
 }
 
 .userInfo-table {
@@ -453,6 +453,18 @@ hr {
 
 .profile .events {
   color: white;
+}
+
+.toppad {
+  padding-top: 10px;
+}
+
+.public-hospital-container {
+  height: 200%;
+}
+
+.profile-info-labels {
+  color: #6e99e1;
 }
 
 @media only screen and (max-width: 990px) {

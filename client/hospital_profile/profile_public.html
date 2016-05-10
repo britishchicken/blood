@@ -1,24 +1,73 @@
-<div class="container">
-  <ul>
-    <li>Hospital: {{HospitalProfileCtrl.editObj.username}} </li>
-    <li>Email: {{HospitalProfileCtrl.editObj.email}} </li>
-    <li>Location: {{HospitalProfileCtrl.editObj.address}} </li>
-    <li>Lat: {{HospitalProfileCtrl.editObj.latitude}} </li>
-    <li>Long: {{HospitalProfileCtrl.editObj.longitude}} </li>
-  </ul>
-  <div class="reviews">
-  <div class="new-review">
-    <form ng-submit="HospitalProfileCtrl.submitReview()">
-      <textarea ng-model="HospitalProfileCtrl.reviewContent"></textarea>
-      <input type="submit">
-    </form>
-  </div>
-  <h2>Reviews:</h2>
-    <div class="review" ng-repeat="review in HospitalProfileCtrl.reviews">
-      <h3>{{review.donor.name}}</h3>
-      <p>{{review.content}}</p>
+<div id="container">
+  <div class="col-lg-10 col-lg-offset-1 toppad" >
+    <div class="col-md-8">
+      <div class="panel-body public-hospital-container">
+        <div class="col-md-3"> <img src="{{HospitalProfileCtrl.editObj.photo}}" alt="No Image Provided" onError="this.src = 'assests/hosp.jpg';" class="img-circle center-block img-profile"/>
+          <div class="hospital-blood-panel">
+            <nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
+          </div>
+        </div>
+        <div class="col-md-3 userInfo-table">
+          <div class="table-user-information">
+            <div>
+              <span class="profile-info-labels">Hospital Name:</span> <br/>
+              <span>{{HospitalProfileCtrl.editObj.name}}</span>
+            </div>
+            <div>
+              <span class="profile-info-labels">Email:</span> <br/>
+              <span>{{HospitalProfileCtrl.editObj.email}}</span>
+            </div>
+            <div>
+              <span class="profile-info-labels">Address:</span>
+              <span>{{HospitalProfileCtrl.editObj.address}}</span>
+            </div>
+            <div>
+              <span class="profile-info-labels">Website:</span><br/>
+              <span>{{HospitalProfileCtrl.editObj.hospitalurl}}</span>
+            </div>
+            <div>
+              <span class="profile-info-labels">Phone Number:</span><br/> <span>{{HospitalProfileCtrl.editObj.phonenum}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 panel-body panel-lower" style="width: 100%;">
+        <div class="profile-table">
+          <div>
+            <hr>
+            <img src="assests/heart.png" />
+            <span>You are hosting a blood drive at [SUBJECT HOMETOWN HERE] Park on October 31st, 2016. So far, [NUMBER] people have responded to say they will be attending.</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/buddy.png" />
+            <span>You and your BLOOD BUDDY went and donated blood together! What a true friend you are.</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/kraken.png" />
+            <span>Your potent virgin blood helped to summon C'thulhu, may his madness envelope the world. Thanks for your help!</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/pizza.png" />
+            <span>A piece of pizza was afraid of needles and didn't want to donate, but you convinced them by sharing your experiences! Wow-wee, all that rich pizza blood will come in handy.</span>
+          </div>
+          <hr>
+          <div>
+            <img src="assests/ghost.png">
+            <span>You donated blood to a man who was later found guilty of murder, and since you're a part of that man now, the spiteful spirit of his victim now haunts you. Bummer! Better luck next time!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 friend-col-outer center-block">
+      <div class="col-md-3 panel-body pull-left friends-col">Here's what people have to say about you:
+        <div class="review" ng-repeat="review in HospitalProfileCtrl.reviews">
+          <h4 class="profile-info-labels">{{review.donor.name}}</h4>
+          <p>{{review.content}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
