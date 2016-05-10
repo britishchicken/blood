@@ -2,9 +2,17 @@
 let db = require('../controllers/controller.js');
 let Donor = db.Donor;
 let Event = db.Event;
+let Hospital = db.Hospital;
 
 let getCurrentDonor = (req, res) => {
-  Donor.findOne({where: {id: req.user.id}, include: [Event]})
+  Donor.findOne({
+    where: {
+      id: req.user.id
+    },
+    include: [{
+      model: Event,
+      include: [Hospital]
+    }]})
   .then(user => {
     res.send(user);
   });

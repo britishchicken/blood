@@ -423,7 +423,7 @@ hr {
   margin: 5px;
 }
 .friends-col {
-  width: 80%;
+  width: 100%;
   height: 100%;
   padding: 15px 15px 0px 15px;
   color: white;
@@ -451,6 +451,10 @@ hr {
   color: gray;
 }
 
+.profile .events {
+  color: white;
+}
+
 @media only screen and (max-width: 990px) {
   .friend-col-outer {
     margin: 0 auto;
@@ -468,4 +472,4 @@ hr {
   }
 }
 
-/* ----------------------------- 
+/* -----------------------------

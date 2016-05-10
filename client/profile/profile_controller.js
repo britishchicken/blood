@@ -64,6 +64,18 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
     });
   };
 
+  ProfileCtrl.upcoming = event => {
+    let offset = new Date(event.time) - new Date();
+    console.log('offset: ', offset);
+    return offset > 0;
+  };
+
+  ProfileCtrl.past = event => {
+    let offset = new Date(event.time) - new Date();
+    console.log('offset: ', offset);
+    return offset < 0;
+  };
+
   displayUser();
 
 }]);
