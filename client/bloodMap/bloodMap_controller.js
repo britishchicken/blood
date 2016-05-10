@@ -131,6 +131,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     .then(function (list) {
       BloodMapCtrl.hospitals = [];
       BloodMapCtrl.hospitals = list;
+      console.log('Sample hospital',BloodMapCtrl.hospitals[0]);
       // setZoom(BloodMapCtrl.map, BloodMapCtrl.hospitals);
 
       //Each time new hospitals are loaded in, reset all blood
@@ -182,7 +183,8 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
 
       let infowindow = new google.maps.InfoWindow({
-        content: "Hospital near you"
+        content: "Hospital near you",
+        maxWidth:200
       });
 
       let marker = new google.maps.Marker({
@@ -192,23 +194,37 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         html: site.hospitalurl
 
       });
-      
+
+
+      let streetimg = null;
       //Content in the infowindow
       let iwContent = '<div id="iw_container">' +
       '<div class="iw_title">' + site.name + '</div>' +
-      '<div class="iw_content">' + site.address + '</div>' +
-      '<div class="iw_content">' +marker.html+ '</div>' +
-      '<div class="iw_content">'+"Call: " + site.phonenum + '<button type="button" class="btn btn-default">' + `<a href="#calendar/${site.id}">`+
-      'Make Appointment</a>' +'</button></div>' +
-      '<div class="iw_content">' + "Open: "+site.openhours + '</div></div>';
+      '<div class="iwf"><div class="iw_content">' + site.address + '</div>' +
+      '<div class="iw_content">' +site.hospitalurl+ '</div>' +
+      '<div class="iw_content">' + "Call: "+site.phonenum+ '</div>' +
+      '<div class="iw_content">' + "Open: "+site.openhours + '</div>' +
+      '<div class="iw_content">' + '<button type="button" class="btn btn-default">' + `<a href="#calendar/${site.id}">`+
+      'Make Appointment</a>' +'</button></div></div>' +
+      '<div id="street"  style="width:100px;height:100px">' + '</div></div>';
       
       //Remove div around the InfoWindow
       google.maps.event.addListener(infowindow, 'domready', function() {
-         var iwOuter = $('.gm-style-iw'); 
-         var iwBackground = iwOuter.prev();  
-         iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-         iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-         iwOuter.children(':nth-child(0)').css({'display' : 'none','overflow': 'hidden'});
+       var iwOuter = $('.gm-style-iw'); 
+       var iwBackground = iwOuter.prev();  
+       iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+       iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+       iwOuter.children(':nth-child(0)').css({'display' : 'none','overflow': 'auto'});
+       
+        streetimg = new google.maps.StreetViewPanorama(document.getElementById("street"), {
+          zoom:3,
+          navigationControl: true,
+          enableCloseButton: false,
+          addressControl: false,
+          linksControl: false
+        });
+        streetimg.bindTo("position", marker);
+        streetimg.setVisible(true);
       });
       
       //Open the infowindow on click and close the previous one
