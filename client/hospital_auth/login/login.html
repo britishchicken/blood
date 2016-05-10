@@ -1,18 +1,25 @@
 <div id="hospital-login">
-  <h3>Login for hospitals</h3>
+  <div class="panel-body login-panel">
+  <h3>Login for Hospitals</h3>
+  <br />
   <form ng-submit="HospitalAuthCtrl.login()">
     <p>
-      Enter your username: 
-      <input type="text" ng-model="HospitalAuthCtrl.loginObj.username" required/>
+      Enter your username:
     </p>
+    <br />
+      <input class="center-block form-control login-input" type="text" ng-model="HospitalAuthCtrl.loginObj.username" required/>
+    <br />
     <p>
-      Enter your password: 
-      <input type="text" ng-model="HospitalAuthCtrl.loginObj.password" required/>
+      Enter your password:
     </p>
-    <button>Login</button>
+    <br />
+      <input class="center-block form-control login-input" type="text" ng-model="Hospital.loginObj.password" required/>
+      <br />
+    <button class="center-block btn profile-button">Login</button>
   </form>
-  </p>
-    Don't have an account? 
+  <p>
+    Don't have an account?
     <a href="#hospital/signup">Sign up!</a>
   </p>
+  </div>
 </div>
