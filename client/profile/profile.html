@@ -74,9 +74,7 @@
     <div class="col-md-4 friend-col-outer center-block">
       <div class="col-md-3 pull-left friends-col">
         <div class="table friends-table table-condensed">
-          <div>
-            <span>Friends:</span>
-          </div>
+          <h4>Friends</h4>
           <div>
            <img src="assests/friend.png" /><a href=''>Mack</a>
          </div>
@@ -90,22 +88,9 @@
           <img src="assests/friend.png" /><a href=''>Mark</a>
         </div>
       </div>
-      <div class="table hospitals-table table-condensed">
-        <div>
-          <span>Favorite Hospitals:</span>
-        </div>
-        <div>
-          <a href=''>Sacred Heart</a>
-        </div>
-        <div>
-          <a href=''>Definitely Not a Front for Vampires</a>
-        </div>
-        <div>
-          <a href=''>Uncle Choppy's Discount Surgery Hut</a>
-        </div>
-        <div>
-          <a href=''>Steve's Hospital and Casino</a>
-        </div>
+      <div class="favorite-hospital">
+        <h4>Favorite Hospitals</h4>
+        <a class="hospital" ng-href="#hospital/profile/{{hospital.model.id}} | limitTo:5" ng-repeat="hospital in ProfileCtrl.hospitals">{{hospital.model.name}}</a>
       </div>
     </div>
   </div>

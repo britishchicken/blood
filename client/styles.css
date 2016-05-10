@@ -233,29 +233,28 @@ header {
  }*/
 
  #iw_container .btn-default {
-    color: #fff;
-    background-color:#595959;
-    border-color: #700000;
-    font-size: 10px;
-    text-align: left;
-    width: 100px;
-    height:30px;
-    float: right;
-    right: 115px;
+  color: #fff;
+  background-color:#595959;
+  border-color: #700000;
+  font-size: 10px;
+  text-align: left;
+  width: 100px;
+  height:30px;
+  float: right;
+  right: 115px;
 
-  }
+}
 
- .iw_content{
+.iw_content{
   font-size: 10px;
   float:right;
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: right;
  }
 
- #iw_container {
+#iw_container {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 11px;
-
 }
 
 
@@ -296,15 +295,10 @@ header {
 
 .event img {
   width: 40px;
-   position: relative;
-   top: 0px ;
-   font-size: 8px;
-   background-color: #fff7e6;
-   border-radius: 15px;
-   border: 2px solid #700000;
-   width: 200px !important;
-   overflow: hidden;
-
+  padding: 2px;
+  font-size: 8px;
+  background-color: #fff7e6;
+  border: 2px solid #700000;
 }
 
 #street{
