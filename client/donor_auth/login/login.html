@@ -1,28 +1,27 @@
 <div id="donor-login">
   <div class="panel-body login-panel">
-  <h3>Login for donors</h3>
-  <br />
-  <form ng-submit="DonorAuthCtrl.login()">
-    <p>
-      Enter your username:
-    </p>
-    <br />
+    <h3>Login for donors</h3>
+    <form ng-submit="DonorAuthCtrl.login()">
+      <div class="align-inputs">
+        <p>
+          Enter your username:
+        </p>
+      </div>
       <input class="center-block form-control login-input" type="text" ng-model="DonorAuthCtrl.loginObj.username" required/>
-    <br />
-    <p>
-      Enter your password:
-    </p>
-    <br />
+      <div class="align-inputs">
+        <p>
+          Enter your password:
+        </p>
+      </div>
       <input class="center-block form-control login-input" type="text" ng-model="DonorAuthCtrl.loginObj.password" required/>
-      <br />
-    <button class="center-block btn profile-button">Login</button>
-  </form>
-  <p>
-    <a href="/auth/facebook">Log in with facebook</a>
-  </p>
-  <p>
-    Don't have an account?
-    <a href="#donor/signup">Sign up!</a>
-  </p>
+      <button class="center-block btn profile-button">Login</button>
+    </form>
+    <p>
+    <a href="/auth/facebook"><img class="facebutton-img" src="../assests/facebutton3.png"/>Log in with Facebook</a>
+    </p>
+    <p>
+      Don't have an account?
+      <a href="#donor/signup">Sign up!</a>
+    </p>
   </div>
 </div>

@@ -1,24 +1,23 @@
 <div id="hospital-signup">
   <div class="panel-body login-panel">
-  <h3>Sign Up as a Hospital</h3>
-  <br />
-  <form ng-submit="HospitalAuthCtrl.signup()">
-    <p>
-      Enter your username:
-    </p>
-    <br />
+    <h3>Sign Up as a Hospital</h3>
+    <form ng-submit="HospitalAuthCtrl.signup()">
+      <div class="align-inputs">
+        <p>
+          Enter your username:
+        </p>
+      </div>
       <input class="center-block form-control login-input" type="text" ng-model="HospitalAuthCtrl.signupObj.username" required/>
-    <br />
-    <p>
-      Enter your password:
-    </p>
-    <br />
+      <div class="align-inputs">
+        <p>
+          Enter your password:
+        </p>
+      </div>
       <input class="center-block form-control login-input" type="text" ng-model="HospitalAuthCtrl.signupObj.password" required/>
-      <br />
-    <button class="center-block btn profile-button">Signup</button>
-  </form>
-  <p>
-    <a href="/auth/facebook">Or, log in with facebook</a>
-  </p>
+      <button class="center-block btn profile-button">Signup</button>
+    </form>
+    <p>
+    <a href="/auth/facebook"><img class="facebutton-img" src="../assests/facebutton3.png"/>Log in with Facebook</a>
+    </p>
   </div>
 </div>
