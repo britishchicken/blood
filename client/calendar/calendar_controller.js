@@ -2,7 +2,8 @@
   app.controller('CalendarController', ['$scope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', function($scope, $controller, $http, $window, $routeParams, Calendar, Event) {
     let CalendarCtrl = this;
     let $calendar = $('#calendar');
-
+//blood buddy
+    CalendarCtrl.buddy= false;
     CalendarCtrl.time = {};
     CalendarCtrl.isHospital = Boolean($window.localStorage.getItem('isHospital'));
 
@@ -55,9 +56,15 @@
         // this should be less hack-ish
         if (calEvent.title === 'Slot Available') {
           let $box1 = $('.modal.box1');
+          let $box3 = $('.modal.box3');
           CalendarCtrl.setView(calEvent);
           $scope.$apply();
-          $box1.modal();
+          if(CalendarCtrl.buddy){
+          console.log('buddy',CalendarCtrl.buddy);
+            $box3.modal();
+          } else {
+            $box1.modal();
+          }
         }
 
         // same here
