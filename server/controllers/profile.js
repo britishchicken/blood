@@ -42,8 +42,6 @@ let getDonorById = (req, res) => {
 };
 
 let getDonorsByLocation = (req, res) => {
-  console.log('donor url',req.url);
-  console.log(req.query);
   let queries = req.query;
   Donor.findAll({where: {
     latitude: {$gt: queries.minLat, $lt: queries.maxLat},
