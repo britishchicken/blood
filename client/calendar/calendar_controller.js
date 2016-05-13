@@ -1,5 +1,5 @@
 (() => {
-  app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed' ,function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed) {
+  app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy' ,function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy) {
     let CalendarCtrl = this;
     let $calendar = $('#calendar');
 //blood buddy
@@ -246,16 +246,28 @@
     CalendarCtrl.buddytwoModal = () => {
       //share on fb
       let $input1 = $('.checkbox.input1').find('input');
+      $("#fb-share-button").show();
+
       //let $input2 = $('.checkbox.input2').find('input');
       //post a message
       let $input3 = $('.checkbox.input3').find('input');
-      $("#fb-share-button").show();
-      let content = "Need a buddy for" +CalendarCtrl.time.print;
-      Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
+      //Post message to feed
+      if ($input3.is(':checked')) {
+        let content = "Looking for a buddy on" +CalendarCtrl.time.print;
+        Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
+      };
+       //Post message to feed
+       console.log('hospital id',$routeParams.hospitalid);
+      CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid);
       $window.location.assign('#bloodbuddy');
-
-     // CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
-      //CalendarCtrl.processRequest($input1, $input2);
+    };
+    CalendarCtrl.buddyRequest = (start, hospitalId) =>
+    {
+      console.log("Enter buddy Request");
+      Buddy.requestBuddy(start,hospitalId)
+      .then(buddy => {
+        console.log('buddy after post', buddy);
+      });
     };
 
     //blood buddy
