@@ -1,5 +1,5 @@
 (() => {
-  app.controller('CalendarController', ['$scope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', function($scope, $controller, $http, $window, $routeParams, Calendar, Event) {
+  app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed' ,function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed) {
     let CalendarCtrl = this;
     let $calendar = $('#calendar');
 //blood buddy
@@ -246,12 +246,13 @@
     CalendarCtrl.buddytwoModal = () => {
       //share on fb
       let $input1 = $('.checkbox.input1').find('input');
-      let $input2 = $('.checkbox.input2').find('input');
+      //let $input2 = $('.checkbox.input2').find('input');
       //post a message
       let $input3 = $('.checkbox.input3').find('input');
-
-
       $("#fb-share-button").show();
+      let content = "Need a buddy for" +CalendarCtrl.time.print;
+      Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
+      $window.location.assign('#bloodbuddy');
 
      // CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
       //CalendarCtrl.processRequest($input1, $input2);
