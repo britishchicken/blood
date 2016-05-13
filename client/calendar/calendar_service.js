@@ -7,6 +7,13 @@
       });
     };
 
+    let getHospitalAppointments = () => {
+      return $http({
+        url: '/api/appointment',
+        method: 'GET'
+      });
+    };
+
     let postCalendarEvent = (startDate, endDate) => {
       return $http({
         url: '/api/calendar',
@@ -56,7 +63,8 @@
       getHospitalProfile,
       getToken,
       getUrl,
-      postCalendarEvent
+      postCalendarEvent,
+      getHospitalAppointments
     };
 
   }]);
