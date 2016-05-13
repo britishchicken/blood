@@ -75,6 +75,11 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
     controller: 'EventController',
     controllerAs: 'EventCtrl'
   })
+  .when('/bloodbuddy', {
+    templateUrl: 'calendar/blood_buddy.html',
+    controller: 'BuddyController',
+    controllerAs: 'BuddyCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });
