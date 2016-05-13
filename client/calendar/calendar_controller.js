@@ -38,6 +38,11 @@
         }
       },
       eventClick: (calEvent, jsEvent, view) => {
+        if (CalendarCtrl.isHospital) {
+          console.log(calEvent);
+          return;
+        }
+
         if (!CalendarCtrl.isLoggedin) {
           return console.log('you are not logged in!');
         }
@@ -48,6 +53,7 @@
           $scope.$apply();
           $box1.modal();
         }
+
       }
     });
 
@@ -57,8 +63,9 @@
         return datum.time;
       }).map(datum => {
         return {
-          title: `${datum.donor.name}, ${datum.donor.email}`,
-          start: new Date(datum.time)
+          title: `Appointment with ${datum.donor.name}`,
+          start: new Date(datum.time),
+          datum: datum
         };
       }));
     };

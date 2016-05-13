@@ -553,4 +553,9 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   font: 18px sans-serif;
 }
 
+.fc-content:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
 
