@@ -59,6 +59,7 @@
           let $box3 = $('.modal.box3');
           CalendarCtrl.setView(calEvent);
           $scope.$apply();
+  //blood buddy
           if(CalendarCtrl.buddy){
           console.log('buddy',CalendarCtrl.buddy);
             $box3.modal();
@@ -229,6 +230,34 @@
 
       $box2.modal();
     };
+//blood buddy
+    CalendarCtrl.buddyoneModal = () => {
+      console.log("Inside third modal");
+      let $box4 = $('.modal.box4');
+      let $inputs = $('.modal').find('input');
+
+      $inputs.each((index, input) => {
+        input.checked = false;
+      });
+
+      $box4.modal();
+    };
+
+    CalendarCtrl.buddytwoModal = () => {
+      //share on fb
+      let $input1 = $('.checkbox.input1').find('input');
+      let $input2 = $('.checkbox.input2').find('input');
+      //post a message
+      let $input3 = $('.checkbox.input3').find('input');
+
+
+      $("#fb-share-button").show();
+
+     // CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
+      //CalendarCtrl.processRequest($input1, $input2);
+    };
+
+    //blood buddy
 
     CalendarCtrl.secondModal = () => {
 
