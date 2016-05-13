@@ -75,14 +75,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Find and schedule an Appointment with a buddy</h4>
+          <h4 class="modal-title">Confirm your time to find a buddy</h4>
         </div>
         <div class="modal-body">
           <p>Would you like to find a buddy and schedule an appointment for {{CalendarCtrl.time.print}}?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.thirdModal()">Confirm and Find a buddy</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.buddyoneModal()">Confirm</button>
         </div>
       </div>
     </div>
@@ -110,6 +110,38 @@
             </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.secondModal()">Make appointment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal box4 fade" id="confirm-modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p>Event on {{CalendarCtrl.time.print}}?</p>
+          <h4 class="modal-title">Select Options to Find a buddy</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="checkbox input1">
+              <label><input type="checkbox" />Share on facebook </label>
+            </div>
+            <div class="fb-share-button"
+              data-href="http://52.39.22.12:8080/#/"
+              data-layout="button_count">
+           </div>
+
+            <div class="checkbox input3">
+              <label><input type="checkbox" /> Post a message</label>
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.buddytwoModal()">Find a buddy to a Make appointment</button>
           </form>
         </div>
       </div>
