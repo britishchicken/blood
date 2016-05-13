@@ -1,10 +1,9 @@
 <div id="calendar-container">
   <h3>Schedule an Appointment!</h3>
-
-  <p>
+  <div ng-hide="CalendarCtrl.isHospital">
     You must be signed into google to see your information
     <button ng-click="CalendarCtrl.googleSignin()">Sign in with google</button>
-  </p>
+  </div>
 
 <!--   <form ng-submit="CalendarCtrl.createEvent()">
     <p>

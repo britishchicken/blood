@@ -4,20 +4,38 @@
     let $calendar = $('#calendar');
 
     CalendarCtrl.time = {};
+    CalendarCtrl.isHospital = Boolean($window.localStorage.getItem('isHospital'));
 
     $calendar.fullCalendar({
       timezone: 'local',
       displayEventEnd: true,
       events: (start, end, timezone, callback) => {
-        Calendar.getCalendarEvents().then(res => {
-          CalendarCtrl.isLoggedin = true;
-          CalendarCtrl.googleEvents = res.data;
-          CalendarCtrl.fillCalendar(callback);
-        }).catch(err => {
-          CalendarCtrl.isLoggedin = false;
-          CalendarCtrl.googleEvents = [];
-          CalendarCtrl.fillCalendar(callback);
-        });
+        if (!$routeParams.hospitalid) {
+          Calendar.getHospitalAppointments().then(res => {
+            console.log('1. you are logged in as hospital');
+            $window.localStorage.setItem('isHospital', 'hello world');
+            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+            CalendarCtrl.fillHospitalCalendar(res, callback);
+          }).catch(err => {
+            console.log('2. you are mostly not logged in as a hospital: ', err);
+            $window.localStorage.setItem('isHospital', '');
+            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+          })
+        } else {
+          $window.localStorage.setItem('isHospital', '');
+          CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+          Calendar.getCalendarEvents().then(res => {
+            console.log('3. you are logged in gmail');
+            CalendarCtrl.isLoggedin = true;
+            CalendarCtrl.googleEvents = res.data;
+            CalendarCtrl.fillCalendar(callback);
+          }).catch(err => {
+            console.log('4. you are not logged in gmail');
+            CalendarCtrl.isLoggedin = false;
+            CalendarCtrl.googleEvents = [];
+            CalendarCtrl.fillCalendar(callback);
+          });
+        }
       },
       eventClick: (calEvent, jsEvent, view) => {
         if (!CalendarCtrl.isLoggedin) {
@@ -32,6 +50,18 @@
         }
       }
     });
+
+    CalendarCtrl.fillHospitalCalendar = (res, callback) => {
+      // console.log(res.data);
+      callback(res.data.filter(datum => {
+        return datum.time;
+      }).map(datum => {
+        return {
+          title: `${datum.donor.name}, ${datum.donor.email}`,
+          start: new Date(datum.time)
+        };
+      }));
+    };
 
     CalendarCtrl.googleSignin = () => {
       Calendar.getUrl().then(res => {
