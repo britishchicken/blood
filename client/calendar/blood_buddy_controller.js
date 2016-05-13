@@ -1,23 +1,19 @@
-app.controller('BuddyController', ['$window' , '$scope', function($window,  $scope) {
+app.controller('BuddyController', ['$window' , '$scope', 'Buddy', function($window,  $scope, Buddy) {
   let BuddyCtrl = this;
   console.log("BuddyCtrl");
 
-  BuddyCtrl.event = {
+  BuddyCtrl.buddy = {
     name: 'Blood Buddy'
   };
 
-  // let getEvent = () => {
-  //   Event.get($routeParams.eventId)
-  //   .then(event => {
-  //     EventCtrl.event = event;
-  //   console.log(event);
-  // });
-  // };
+  let getBuddy = () => {
+    Buddy.get()
+    .then(buddy => {
+      BuddyCtrl.buddy = buddy;
+    console.log(buddy);
+  });
+  };
 
-  // EventCtrl.join = () => {
-  //   Event.join($routeParams.eventId)
-  //   .then(getEvent);
-  // };
 
-  // getEvent();
+  getBuddy();
 }]);
