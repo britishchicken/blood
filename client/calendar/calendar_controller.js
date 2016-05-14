@@ -252,7 +252,10 @@
 
       // save event if checked
       if ($input2.is(':checked')) {
-        $http.post('/api/event', {hospitalId: $routeParams.hospitalid}).then(res => {
+        $http.post('/api/event', {
+          hospitalId: $routeParams.hospitalid,
+          time: CalendarCtrl.time.start
+        }).then(res => {
           console.log('event res: ', res);
         }).catch(err => {
           console.log('error: ', err);
