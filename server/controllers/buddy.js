@@ -13,6 +13,7 @@ let requestBuddy = (req, res) => {
     Buddy.create({
       time: req.body.time,
       found: false,
+      buddyemail: null,
       donorId: donorId,
       hospitalId: req.body.hospitalid})
     .then(buddy => res.send(buddy));
@@ -33,5 +34,26 @@ let getBuddy = (req, res) => {
 
 };
 
+let updateBuddy = (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body);
+
+  Buddy.findOne({where: {id: req.params.id},
+  include: [Donor, Hospital]})
+  .then(() => {
+    Buddy.update({
+      found: true,
+      buddyemail: req.body.buddyemail
+  } ,{where: {donorId: req.user.id}})
+  .then(buddy => {
+    console.log(buddy);
+    res.send(buddy);
+
+  });
+
+ });
+};
+
 module.exports.getBuddy = getBuddy;
 module.exports.requestBuddy = requestBuddy;
+module.exports.updateBuddy = updateBuddy;
