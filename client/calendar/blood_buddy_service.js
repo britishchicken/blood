@@ -25,7 +25,22 @@ app.factory('Buddy', ['$http', function($http) {
     });
   };
 
-  return {get,requestBuddy};
+   let update = (buddyId, buddyemail) => {
+    return $http({
+      method: 'PUT',
+      url: `/api/bloodbuddy/${buddyId}`,
+      data:{
+        found: true,
+        buddyemail: buddyemail
+      }
+    })
+      .then((resp) => {
+        console.log(resp.data);
+      return resp.data;
+    });
+  };
+
+  return {get,requestBuddy,update};
 }]);
 
 
