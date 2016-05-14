@@ -232,7 +232,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     BloodMap.getDonors(geoobj)
     .then(function (donors) {
       for(let i=0; i<5; i++){
-          console.log($scope.donordata[0].values[i].value);
           $scope.donordata[0].values[i].value = 0;
           $scope.donordata[0].values[i].label = '';
         }
