@@ -92,6 +92,7 @@ Donor.hasMany(Appointment);
 
 let Buddy = sequelize.define('buddy', {
  time: Sequelize.DATE,
+ buddyemail:Sequelize.STRING,
  found: Sequelize.BOOLEAN,
 });
 Buddy.belongsTo(Hospital);
