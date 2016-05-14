@@ -1,8 +1,8 @@
 app.factory('Buddy', ['$http', function($http) {
-  let get = () => {
+  let get = (buddyId) => {
     return $http({
       method: 'GET',
-      url: '/api/bloodbuddy',
+      url: `/api/bloodbuddy/${buddyId}`,
     })
     .then((res) => {
       return res.data;
