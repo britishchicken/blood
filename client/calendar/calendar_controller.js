@@ -259,7 +259,7 @@
        //Post message to feed
        console.log('hospital id',$routeParams.hospitalid);
       CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid);
-      $window.location.assign('#bloodbuddy');
+      //$window.location.assign(`#bloodbuddy/${buddyId}`);
     };
     CalendarCtrl.buddyRequest = (start, hospitalId) =>
     {
@@ -267,6 +267,7 @@
       Buddy.requestBuddy(start,hospitalId)
       .then(buddy => {
         console.log('buddy after post', buddy);
+         $window.location.assign(`#bloodbuddy/${buddy.id}`);
       });
     };
 
