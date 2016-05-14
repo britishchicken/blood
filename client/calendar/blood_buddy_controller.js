@@ -1,4 +1,4 @@
-app.controller('BuddyController', ['$window' , '$scope', 'Buddy', function($window,  $scope, Buddy) {
+app.controller('BuddyController', ['$window' , '$scope','$routeParams', 'Buddy', function($window,  $scope,$routeParams, Buddy) {
   let BuddyCtrl = this;
   console.log("BuddyCtrl");
 
@@ -7,7 +7,7 @@ app.controller('BuddyController', ['$window' , '$scope', 'Buddy', function($wind
   };
 
   let getBuddy = () => {
-    Buddy.get()
+    Buddy.get($routeParams.buddyId)
     .then(buddy => {
       BuddyCtrl.buddy = buddy;
     console.log(buddy);
