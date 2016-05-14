@@ -19,10 +19,19 @@ let requestBuddy = (req, res) => {
   });
 };
 
+// let getBuddy = (req, res) => {
+//   Buddy.findOne({where: {donorId: req.user.id}})
+//   .then(buddy => res.send(buddy));
+
+// };
+
 let getBuddy = (req, res) => {
-  Buddy.findOne({where: {donorId: req.user.id}})
+  console.log(req.params.id);
+  Buddy.findOne({where: {id: req.params.id},
+  include: [Donor, Hospital]})
   .then(buddy => res.send(buddy));
 
 };
+
 module.exports.getBuddy = getBuddy;
 module.exports.requestBuddy = requestBuddy;
