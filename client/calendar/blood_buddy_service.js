@@ -10,8 +10,6 @@ app.factory('Buddy', ['$http', function($http) {
   };
 
   let requestBuddy = (starttime, hospitalid) => {
-      console.log("Enter buddy Request");
-
     return $http({
       method: 'POST',
       url: '/api/bloodbuddy',
@@ -29,13 +27,8 @@ app.factory('Buddy', ['$http', function($http) {
     return $http({
       method: 'PUT',
       url: `/api/bloodbuddy/${buddyId}`,
-      data:{
-        found: true,
-        buddyemail: buddyemail
-      }
     })
       .then((resp) => {
-        console.log(resp.data);
       return resp.data;
     });
   };
