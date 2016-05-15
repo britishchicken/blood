@@ -5,54 +5,25 @@
 //blood buddy
     CalendarCtrl.buddy= false;
     CalendarCtrl.time = {};
-    CalendarCtrl.isHospital = Boolean($window.localStorage.getItem('isHospital'));
 
     $calendar.fullCalendar({
       timezone: 'local',
       displayEventEnd: true,
       events: (start, end, timezone, callback) => {
-        // if is hospital
-        if (!$routeParams.hospitalid) {
-          Calendar.getHospitalAppointments().then(res => {
-            console.log('1. you are logged in as hospital');
-            $window.localStorage.setItem('isHospital', 'hello world');
-            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-            CalendarCtrl.fillHospitalCalendar(res, callback);
-          }).catch(err => {
-            console.log('2. you are not logged in as a hospital: ', err);
-            $window.localStorage.setItem('isHospital', '');
-            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-          })
-        // if is donor
-        // within, check if gmail
-        } else {
-          $window.localStorage.setItem('isHospital', '');
-          CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-          Calendar.getCalendarEvents().then(res => {
-            console.log('3. you are logged in gmail');
-            CalendarCtrl.isLoggedin = true;
-            CalendarCtrl.googleEvents = res.data;
-            CalendarCtrl.fillCalendar(callback);
-          }).catch(err => {
-            console.log('4. you are not logged in gmail');
-            CalendarCtrl.isLoggedin = false;
-            CalendarCtrl.googleEvents = [];
-            CalendarCtrl.fillCalendar(callback);
-          });
-        }
+        Calendar.getCalendarEvents().then(res => {
+          CalendarCtrl.isLoggedin = true;
+          CalendarCtrl.googleEvents = res.data;
+          CalendarCtrl.fillCalendar(callback);
+        }).catch(err => {
+          CalendarCtrl.isLoggedin = false;
+          CalendarCtrl.googleEvents = [];
+          CalendarCtrl.fillCalendar(callback);
+        });
       },
       eventClick: (calEvent, jsEvent, view) => {
-        if (CalendarCtrl.isHospital) {
-          $window.open(`#/profile/${calEvent.datum.donorId}`, '_blank');
-          return;
+        if (!CalendarCtrl.isLoggedin) {
+          return console.log('you are not logged in!');
         }
-
-        // currently this feature is disabled
-        // if (!CalendarCtrl.isLoggedin) {
-        //   return console.log('you are not logged in!');
-        // }
-
-
         // this should be less hack-ish
         if (calEvent.title === 'Slot Available') {
           let $box1 = $('.modal.box1');
@@ -67,27 +38,8 @@
             $box1.modal();
           }
         }
-
-        // same here
-        if (calEvent.title === 'Your appointment') {
-          $window.open(`#/hospital/profile/${$routeParams.hospitalid}`, '_blank');
-        }
-
       }
     });
-
-    CalendarCtrl.fillHospitalCalendar = (res, callback) => {
-      // console.log(res.data);
-      callback(res.data.filter(datum => {
-        return datum.time;
-      }).map(datum => {
-        return {
-          title: `Appointment with ${datum.donor.name}`,
-          start: new Date(datum.time),
-          datum: datum
-        };
-      }));
-    };
 
     CalendarCtrl.googleSignin = () => {
       Calendar.getUrl().then(res => {
@@ -124,32 +76,28 @@
         }
         let currentDate = new Date();
         let dayIndex, startHour, endHour;
-
-        if (!CalendarCtrl.dontMakeAppointments) {
-          CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
-            currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
-            dayIndex = (currentDate.getDay() + 6) % 7;
+        CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
+          currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
+          dayIndex = (currentDate.getDay() + 6) % 7;
+          return {
+            currentDate: currentDate,
+            openhour: res.data.schedules[dayIndex].openhours,
+            endhour: res.data.schedules[dayIndex].closehours,
+          };
+        }).filter(data => {
+          return !!data.openhour;
+        }).map(data => {
+          return _.range(data.openhour, data.endhour).map(hour => {
             return {
-              currentDate: currentDate,
-              openhour: res.data.schedules[dayIndex].openhours,
-              endhour: res.data.schedules[dayIndex].closehours,
+              title: 'Slot Available',
+              start: data.currentDate.setHours(hour, 0, 0, 0),
+              backgroundColor: '#378006'
             };
-          }).filter(data => {
-            return !!data.openhour;
-          }).map(data => {
-            return _.range(data.openhour, data.endhour).map(hour => {
-              return {
-                title: 'Slot Available',
-                start: data.currentDate.setHours(hour, 0, 0, 0),
-                backgroundColor: '#378006'
-              };
-            });
-          }));
-          checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
-          callback(CalendarCtrl.appointments);
-        } else {
-          callback([]);
-        }
+          });
+        }));
+        checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
+        callback(CalendarCtrl.appointments);
+
       })
     };
 
@@ -189,17 +137,10 @@
       endDate = endDate || CalendarCtrl.dateTime || startDate;
 
       Calendar.postCalendarEvent(startDate, endDate).then(res => {
-        $calendar.fullCalendar('removeEvents');
-        $calendar.fullCalendar('refetchEvents');
-      }).catch(err => {
-        $calendar.fullCalendar('removeEvents');
-        console.log('the error for not being logged in', err);
-        console.log(startDate);
-        $calendar.fullCalendar('addEventSource', [{
-          title: 'Your appointment',
-          start: startDate
-        }]);
-      })
+        if (res.status === 201) {
+          $calendar.fullCalendar('refetchEvents');
+        }
+      });
     };
 
     CalendarCtrl.removeEventData = (events, index) => {
@@ -232,7 +173,6 @@
     };
 //blood buddy
     CalendarCtrl.buddyoneModal = () => {
-      console.log("Inside third modal");
       let $box4 = $('.modal.box4');
       let $inputs = $('.modal').find('input');
 
@@ -247,27 +187,22 @@
       //share on fb
       let $input1 = $('.checkbox.input1').find('input');
       $("#fb-share-button").show();
-
-      //let $input2 = $('.checkbox.input2').find('input');
-      //post a message
       let $input3 = $('.checkbox.input3').find('input');
-      //Post message to feed
-      if ($input3.is(':checked')) {
-        let content = "Looking for a buddy on" +CalendarCtrl.time.print;
-        Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-      };
-       //Post message to feed
        console.log('hospital id',$routeParams.hospitalid);
-      CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid);
-      //$window.location.assign(`#bloodbuddy/${buddyId}`);
+      CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
     };
-    CalendarCtrl.buddyRequest = (start, hospitalId) =>
+    CalendarCtrl.buddyRequest = (start, hospitalId, $input3) =>
     {
-      console.log("Enter buddy Request");
       Buddy.requestBuddy(start,hospitalId)
       .then(buddy => {
-        console.log('buddy after post', buddy);
+        if ($input3.is(':checked')) {
+         let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+         Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
+       };
          $window.location.assign(`#bloodbuddy/${buddy.id}`);
+
+
+
       });
     };
 
@@ -278,7 +213,6 @@
       let $input1 = $('.checkbox.input1').find('input');
       let $input2 = $('.checkbox.input2').find('input');
 
-      CalendarCtrl.dontMakeAppointments = true;
       CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
       CalendarCtrl.processRequest($input1, $input2);
     };
@@ -286,13 +220,15 @@
     // this will need refactoring and modularizing!!
     CalendarCtrl.processRequest = ($input1, $input2) => {
       // save appointment
-      Calendar.postAppointment($routeParams.hospitalid, CalendarCtrl.time.start, 1)
-        .then(res => {
-          console.log('appointment made! ', res);
-        })
-        .catch(err => {
-          console.log('error in making appointment! ', err);
-        });
+      $http.post('/api/appointment', {
+        hospitalId: $routeParams.hospitalid,
+        time: CalendarCtrl.time.start
+      }).then(res => {
+        console.log('appointment res: ', res);
+      }).catch(err => {
+        console.log('error: ', err);
+      })
+
       // send email to both parties
 
       // share to facebook if checked
@@ -302,10 +238,7 @@
 
       // save event if checked
       if ($input2.is(':checked')) {
-        $http.post('/api/event', {
-          hospitalId: $routeParams.hospitalid,
-          time: CalendarCtrl.time.start
-        }).then(res => {
+        $http.post('/api/event', {hospitalId: $routeParams.hospitalid}).then(res => {
           console.log('event res: ', res);
         }).catch(err => {
           console.log('error: ', err);
