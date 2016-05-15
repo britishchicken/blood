@@ -92,8 +92,7 @@ Donor.hasMany(Appointment);
 
 let Buddy = sequelize.define('buddy', {
  time: Sequelize.DATE,
- buddyemail:Sequelize.STRING,
- found: Sequelize.BOOLEAN,
+ buddyId:Sequelize.INTEGER
 });
 Buddy.belongsTo(Hospital);
 Buddy.belongsTo(Donor);
