@@ -95,7 +95,8 @@ let Buddy = sequelize.define('buddy', {
  buddyId:Sequelize.INTEGER
 });
 Buddy.belongsTo(Hospital);
-Buddy.belongsTo(Donor);
+Buddy.belongsTo(Donor, {as:'buddy'});
+Buddy.belongsTo(Donor, {as:'donor'});
 Donor.hasMany(Buddy);
 
 sequelize.sync();
