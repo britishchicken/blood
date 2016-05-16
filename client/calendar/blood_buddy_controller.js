@@ -1,7 +1,6 @@
 app.controller('BuddyController', ['$window' , '$scope','$routeParams', 'Buddy','Calendar', function($window,  $scope,$routeParams, Buddy, Calendar) {
   let BuddyCtrl = this;
   //BuddyCtrl.found = false;
-  console.log("BuddyCtrl");
 
   BuddyCtrl.buddy = {
     name: 'Blood Buddy'
