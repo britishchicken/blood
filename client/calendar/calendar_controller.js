@@ -32,7 +32,6 @@
           $scope.$apply();
   //blood buddy
           if(CalendarCtrl.buddy){
-          console.log('buddy',CalendarCtrl.buddy);
             $box3.modal();
           } else {
             $box1.modal();
@@ -50,7 +49,6 @@
           let code = e.data.substring(index + 5).replace('#', '');
           newWindow.close();
           Calendar.getToken(code).then(res => {
-            console.log('You are authenticated!');
             $calendar.fullCalendar('refetchEvents');
           });
         };
@@ -121,7 +119,6 @@
           } else if (appointmentTime > endTime) {
             endIndex = midIndex - 1;
           } else {
-            console.log('wtf, this is not suppose to happen!');
             break;
           }
         }
@@ -144,7 +141,6 @@
     };
 
     CalendarCtrl.removeEventData = (events, index) => {
-      console.log('removed!');
       CalendarCtrl.appointments.splice(index, 1);
     };
 
@@ -188,7 +184,6 @@
       let $input1 = $('.checkbox.input1').find('input');
       $("#fb-share-button").show();
       let $input3 = $('.checkbox.input3').find('input');
-       console.log('hospital id',$routeParams.hospitalid);
       CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
     };
     CalendarCtrl.buddyRequest = (start, hospitalId, $input3) =>
