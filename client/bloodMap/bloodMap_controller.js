@@ -59,7 +59,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     }
     let mapProp = {
             // center:new google.maps.LatLng(37.783697,-122.408966),
-            center: new google.maps.LatLng($scope.latitude,$scope.longitude),
+            center: new google.maps.LatLng($rootScope.latitude,$rootScope.longitude),
             zoom:17,
             mapTypeId:google.maps.MapTypeId.ROADMAP
           };
@@ -232,7 +232,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     BloodMap.getDonors(geoobj)
     .then(function (donors) {
       for(let i=0; i<5; i++){
-          console.log($scope.donordata[0].values[i].value);
           $scope.donordata[0].values[i].value = 0;
           $scope.donordata[0].values[i].label = '';
         }
@@ -253,8 +252,8 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
 
  let showLocation = (position) => {
-    $scope.latitude = position.coords.latitude;
-    $scope.longitude = position.coords.longitude;
+    $rootScope.latitude = position.coords.latitude;
+    $rootScope.longitude = position.coords.longitude;
   };
 
   let errorHandler = (err) => {

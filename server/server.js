@@ -22,6 +22,8 @@ let authRouter = auth.authRouter;
 let calendarRouter = require('./routes/calendar.js');
 let eventRouter = require('./routes/event.js');
 let appointmentRouter = require('./routes/appointment.js');
+let buddyRouter = require('./routes/buddy.js');
+
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -44,6 +46,7 @@ app.use('/api/calendar', calendarRouter);
 app.use('/api/post', postRouter);
 app.use('/api/appointment', appointmentRouter);
 app.use('/api/event', eventRouter);
+app.use('/api/bloodbuddy', buddyRouter);
 app.use('/auth', authRouter);
 
 

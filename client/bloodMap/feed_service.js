@@ -11,6 +11,8 @@ app.factory('Feed', ['$http', function($http) {
   };
 
   let submit = (content, location) => {
+    console.log(content);
+    console.log(location);
     return $http({
       method: 'POST',
       url: '/api/post',

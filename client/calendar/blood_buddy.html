@@ -1,0 +1,38 @@
+<div>
+  <h2>Blood Buddy</h2>
+  <div ng-hide="BuddyCtrl.found">
+  <form ng-submit="BuddyCtrl.submit()">
+  <h3>Join as buddy</h3><input type="submit" >
+  </form>
+  </div>
+  <div ng-show="BuddyCtrl.found">
+  <h3> Found a buddyyy Yayyyy</h3>
+  </div>
+
+<div class="col-md-6 userInfo-table">
+        <div style="color:black">
+        <!-- <img ng-src="{{BuddyCtrl.buddy.donor.photo}}" class="img-circle center-block img-profile"/> -->
+          <div>
+            <span class="profile-info-labels">Donor Name:</span>
+            <p>{{BuddyCtrl.buddy.donor.name}}</p>
+          </div>
+          <div>
+            <span class="profile-info-labels">Proposed time to schedule appointment:</span>
+            <p>{{BuddyCtrl.buddy.time}}</p>
+          </div>
+          <div>
+            <span class="profile-info-labels">Donor Email:</span>
+            <p>{{BuddyCtrl.buddy.donor.email}}</p>
+          </div>
+          <div>
+            <span class="profile-info-labels">Blood Type:</span>
+            <p>{{BuddyCtrl.buddy.donor.bloodtype}}</p>
+          </div>
+          <div>
+            <span class="profile-info-labels">Hospital Address:</span>
+            <p>{{BuddyCtrl.buddy.hospital.address}}</p>
+          </div>
+        </div>
+</div>
+
+</div>

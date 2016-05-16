@@ -1,4 +1,4 @@
-app.controller('FeedController', ['$scope', 'Feed', function($scope, Feed) {
+app.controller('FeedController', ['$scope', '$rootScope','Feed', function($scope,$rootScope, Feed) {
   let FeedCtrl = this;
   FeedCtrl.posts = [];
 
@@ -14,7 +14,7 @@ app.controller('FeedController', ['$scope', 'Feed', function($scope, Feed) {
   setInterval(updatePosts, 5000);
 
   FeedCtrl.submit = () => {
-    Feed.submit(FeedCtrl.content, {latitude: $scope.latitude, longitude: $scope.longitude});
+    Feed.submit(FeedCtrl.content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
     updatePosts();
   };
 }]);

@@ -5,20 +5,26 @@
     <button ng-click="CalendarCtrl.googleSignin()">Sign in with google</button>
   </div>
 
+
+
 <!--   <form ng-submit="CalendarCtrl.createEvent()">
-    <p>
-      Choose a date:
-      <input type="datetime-local" ng-model="CalendarCtrl.dateTime"/>
-      <button>Schedule it!</button>
-    </p>
-  </form>
 
   </form> -->
+
+<!--Start Blood Buddy -->
+
+
+<span>
+ <h4>Find me a blood buddy...<input type="checkbox" class="checkbox checkbox-inline" ng-model="CalendarCtrl.buddy" /></h4>
+</span>
+
+  <!--End Blood Buddy -->
+
+
   <p>
     <!-- If you deleted an event from your calendar, click -->
     <button ng-click="CalendarCtrl.reload()">refresh</button>
   </p>
-
   <!-- <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button> -->
 
   <div class="fb-share-button"
@@ -50,6 +56,30 @@
     </div>
   </div>
 
+
+  <!-- blood buddy box 3 -->
+   <div class="modal box3 fade" id="confirm-modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirm your time to find a buddy</h4>
+        </div>
+        <div class="modal-body">
+          <p>Would you like to find a buddy and schedule an appointment for {{CalendarCtrl.time.print}}?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.buddyoneModal()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- end of blood buddy box 3 -->
+
   <div class="modal box2 fade" id="confirm-modal" role="dialog">
     <div class="modal-dialog">
 
@@ -70,6 +100,38 @@
             </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.secondModal()">Make appointment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal box4 fade" id="confirm-modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p>Event on {{CalendarCtrl.time.print}}?</p>
+          <h4 class="modal-title">Select Options to Find a buddy</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="checkbox input1">
+              <label><input type="checkbox" />Share on facebook </label>
+            </div>
+            <div class="fb-share-button"
+              data-href="http://52.39.22.12:8080/#/"
+              data-layout="button_count">
+           </div>
+
+            <div class="checkbox input3">
+              <label><input type="checkbox" /> Post a message</label>
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.buddytwoModal()">Find a buddy</button>
           </form>
         </div>
       </div>
