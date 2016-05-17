@@ -1,8 +1,7 @@
-<div id="calendar-container">
-  <div ng-hide="CalendarCtrl.isHospital" ng-hide="CalendarCtrl.isHospital">
+<div id="calendar-container" class="calendar">
+  <div class="panel-body">
+  <div ng-hide="CalendarCtrl.isHospital">
   <h3>Schedule an Appointment!</h3>
-    You must be signed into google to see your information
-    <button ng-click="CalendarCtrl.googleSignin()">Sign in with google</button>
   </div>
   <div ng-show="CalendarCtrl.isHospital">
   <h3>Create an Event!</h3>
@@ -20,11 +19,13 @@
 
 
 <span>
- <h4>Find me a blood buddy...<input type="checkbox" class="checkbox checkbox-inline" ng-model="CalendarCtrl.buddy" /></h4>
+ <h5>Only finalize appointment if a blood buddy joins me: <input type="checkbox" class="checkbox checkbox-inline" ng-model="CalendarCtrl.buddy" />   </h5>
 </span>
 
   <!--End Blood Buddy -->
+  <div ng-hide="CalendarCtrl.isHospital" class="calendar-google-zone">
 
+<<<<<<< 6d387755171ebf325fdfe2af9fdff25dfcb06e61
 
   <p>
     <!-- If you deleted an event from your calendar, click -->
@@ -35,6 +36,11 @@
   <button class="fb-share-button" id="myfb" href="https://bloodshare.io" data-layout="button_count" data-mobile-iframe="false" width=10 height=50></button>
 
   <!-- <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button> -->
+=======
+  <span> Sync with Google calendar! </span>
+    <button ng-click="CalendarCtrl.googleSignin()" class="btn profile-button">Google Sign-in</button>
+    </div>
+>>>>>>> Style calendar page.
   <div id="calendar"></div>
 
   <!-- Modal -->
@@ -122,21 +128,16 @@
         </div>
         <div class="modal-body">
           <form role="form">
-            <div class="checkbox input1">
-              <label><input type="checkbox" />Share on facebook </label>
-            </div>
-
-           <button class="fb-share-button" id="myfb" ng-href={{$window.location.href}} data-layout="button_count" data-mobile-iframe="false" width=10 height=50></button>
 
             <div class="checkbox input3">
               <label><input type="checkbox" /> Post a message</label>
             </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default profile-button" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.buddytwoModal()">Find a buddy</button>
           </form>
         </div>
       </div>
     </div>
   </div>
-
+</div>
 </div>

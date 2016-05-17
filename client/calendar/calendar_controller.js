@@ -240,6 +240,7 @@
 
     CalendarCtrl.googleSignin = () => {
       Calendar.getUrl().then(res => {
+        console.log(res);
         let newWindow = $window.open(res.data, 'AuthPage', 'width=500px,height=700px');
         // e.data is a string with the code
         $window.onmessage = (e) => {
