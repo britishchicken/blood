@@ -10,7 +10,6 @@ BuddyCtrl.post =() => {
 
   BuddyCtrl.buddytwoModal = () => {
       //share on fb
-      console.log(BuddyCtrl.buddy);
       let formatTime = $filter('date')(BuddyCtrl.buddy.time,' MM/dd @ HH:mm');
       let $input3 = $('.checkbox.input3').find('input');
       if ($input3.is(':checked')) {
