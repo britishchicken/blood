@@ -297,7 +297,7 @@
       .then(buddy => {
         let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "https://bloodshare.io/bloodbuddy/"+buddy.id ;
         Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-         $window.location.assign(`#bloodbuddy/${buddy.id}`);
+        $window.location.assign(`#bloodbuddy/${buddy.id}`);
       });
 
     };
