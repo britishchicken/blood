@@ -1,4 +1,4 @@
-app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootScope','Buddy','Calendar','Feed', function($window,  $scope,$routeParams, $rootScope, Buddy, Calendar, Feed) {
+app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootScope','$filter','Buddy','Calendar','Feed', function($window,  $scope,$routeParams, $rootScope, $filter, Buddy, Calendar, Feed) {
   let BuddyCtrl = this;
   BuddyCtrl.buddy = {
     name: 'Blood Buddy'
@@ -10,9 +10,11 @@ BuddyCtrl.post =() => {
 
   BuddyCtrl.buddytwoModal = () => {
       //share on fb
+      console.log(BuddyCtrl.buddy);
+      let formatTime = $filter('date')(BuddyCtrl.buddy.time,' MM/dd @ HH:mm');
       let $input3 = $('.checkbox.input3').find('input');
       if ($input3.is(':checked')) {
-         let content = "Looking for a buddy on" + " " + BuddyCtrl.buddy.time +" " + "https://bloodshare.io/bloodbuddy/"+ BuddyCtrl.buddy.id ;
+         let content = "Looking for a buddy on" + " " + formatTime +" " + "https://bloodshare.io/bloodbuddy/"+ BuddyCtrl.buddy.id ;
          Feed.submit(content, {latitude: BuddyCtrl.buddy.hospital.latitude, longitude: BuddyCtrl.buddy.hospital.longitude});
       };
     };
