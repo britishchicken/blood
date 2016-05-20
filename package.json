@@ -4,7 +4,9 @@
   "description": "blood donation app",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox && mocha ./server/test/*"
+    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox && mocha ./server/test/*",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha ./server/test/",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,7 @@
     "geolib": "^2.0.20",
     "google-auth-library": "^0.9.7",
     "googleapis": "^5.2.1",
+    "istanbul": "^0.4.3",
     "karma": "^0.13.22",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-chai": "^0.1.0",
