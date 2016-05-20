@@ -26,3 +26,6 @@ services:
 before_install:
   - touch serverconfig.js
   - mysql -u root -e 'create database blood;'
+after_success:
+  - npm run coverage
+  - npm run report-coverage
