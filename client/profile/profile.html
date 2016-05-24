@@ -1,6 +1,6 @@
 <div class="container profile">
   <div class="col-md-8">
-    <div class="panel-body">
+    <div class="panel-body user-view">
       <div class="col-md-6">
         <img ng-src="{{ProfileCtrl.user.photo}}" class="img-circle center-block img-profile"/>
       </div>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div>
-          <button ng-hide="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">
+          <button ng-hide="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn edit-button">
             <span>Edit Info</span>
           </button>
           <div ng-show="ProfileCtrl.edit">
@@ -38,7 +38,7 @@
               <label for="bloodtype">Blood Type:</label>
               <select name="bloodtype" ng-model="ProfileCtrl.user.bloodtype" ng-options="type for type in ProfileCtrl.bloodTypes">
               </select>
-              <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
+              <input type="submit" id="submit" value="Submit" class="btn profile-button-submit"/>
               <button ng-show="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" type="button" class="profile-button-cancel btn">
                 <span>Cancel Edit</span>
               </button>

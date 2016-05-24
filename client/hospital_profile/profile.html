@@ -34,9 +34,9 @@
           <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn" style="color: white;">Edit Info</button>
         </div>
       </div>
-      <div ng-show="HospitalProfileCtrl.edit">
+      <div id="edit-view" ng-show="HospitalProfileCtrl.edit">
         <form ng-submit="HospitalProfileCtrl.update()" style="color: gray;">
-          <div class="col-md-6">
+          <div class="col-md-6" id="edit-info">
             <p>Edit Information:</p>
             <p>
               Hospital name
@@ -59,7 +59,7 @@
               <input type="text"  ng-model="HospitalProfileCtrl.hospital.hospitalurl" ng-model-options="{ updateOn: 'submit'}" />
             </p>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" id="edit-hours">
             <p>
               Hospital Hours
               <p ng-repeat="schedule in HospitalProfileCtrl.schedule">
@@ -70,8 +70,8 @@
               </p>
             </p>
           </div>
-          <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Submit</button>
-          <button type="button" ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Cancel Edit</button>
+          <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn submit-button">Submit</button>
+          <button type="button" ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn cancel-button">Cancel Edit</button>
         </form>
       </div>
     </div>

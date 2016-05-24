@@ -32,6 +32,38 @@ grunt.initConfig({
         'client/dist/build_es5.js': 'client/dist/build.js'
       }
     }
+  },
+
+  connect: {
+    server: {
+      options: {
+        hostname: 'localhost',
+        port: 9876,
+        base: '.'
+      }
+    }
+  },
+  protractor_webdriver: {
+    webDriverStart: {
+      options: {
+        path: './node_modules/protractor/bin/',
+        command: 'webdriver-manager start'
+      }
+    },
+  },
+  protractor: {
+    options: {
+      configFile: './protractor.conf.js',
+      keepAlive: false,
+      noColor: false,
+      args: { }
+    },
+    test: {
+      options: {
+        configFile: './protractor.conf.js',
+        args: { }
+      }
+    }
   }
 });
 
@@ -40,7 +72,12 @@ grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-babel');
 
+grunt.loadNpmTasks('grunt-contrib-connect');
+grunt.loadNpmTasks('grunt-protractor-runner');
+grunt.loadNpmTasks('grunt-protractor-webdriver');
+
 // Default task(s).
 grunt.registerTask('default', ['concat', 'babel', 'uglify']);
+grunt.registerTask('test', ['connect', 'protractor_webdriver:webDriverStart', 'protractor:test']);
 
 };
