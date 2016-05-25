@@ -28,7 +28,7 @@
     </li>
     <li>
       <a ng-hide="NavCtrl.isDonor || NavCtrl.isHospital" href="/donor/login"><span class="glyphicon glyphicon-log-in"></span>Log In</a>
-      <a ng-show="NavCtrl.isDonor || NavCtrl.isHospital" ng-click="NavCtrl.logout()" href=""><span class="glyphicon glyphicon-remove"></span>Logout</a>
+      <a name="logout-btn" ng-show="NavCtrl.isDonor || NavCtrl.isHospital" ng-click="NavCtrl.logout()" href=""><span class="glyphicon glyphicon-remove"></span>Logout</a>
     </li>
     <li>
       <a ng-hide="NavCtrl.isDonor || NavCtrl.isHospital" href="/donor/signup"><span class="glyphicon glyphicon-ok"></span>Sign Up!</a>

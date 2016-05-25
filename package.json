@@ -4,7 +4,7 @@
   "description": "blood donation app",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox && mocha ./server/test/*",
+    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox && mocha ./server/test/* && ./node_modules/.bin/protractor ./protractor.conf.js",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha ./server/test/",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
